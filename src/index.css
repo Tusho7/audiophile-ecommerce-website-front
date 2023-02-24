@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    width: 100vw;
+    min-height: 100vh;
+    font-style: normal;
+    font-family: Verdana;
+  background: linear-gradient(#8b80f9, #212123);
+  }
