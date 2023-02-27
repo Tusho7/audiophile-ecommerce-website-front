@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import "../index.css";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -15,13 +16,11 @@ function SignUp() {
     event.preventDefault();
 
     if (!email) {
-      console.log("Please enter your email");
       setEmailError("Please enter your email");
       return;
     }
 
     if (!password) {
-      console.log("Please enter your password");
       setPasswordError("Please enter your password");
       return;
     }
@@ -31,7 +30,6 @@ function SignUp() {
     }
 
     if (!avatar) {
-      console.log("Please upload your avatar ");
       setAvatarError("Please upload your avatar");
       return;
     }
@@ -106,8 +104,16 @@ function SignUp() {
           <input type="file" accept="image/*" onChange={handleAvatarChange} />
           {avatarError && <p className="error">{avatarError}</p>}
         </div>
-        <button type="submit">Sign Up</button>
+        <SingUpButton>
+          <button type="submit">Sign Up</button>
+        </SingUpButton>
       </form>
+      <LoginDiv>
+        <p>Already have an account?</p>
+        <LoginLink to="/login" className="login-butt">
+          Login
+        </LoginLink>
+      </LoginDiv>
     </SignUpWrapper>
   );
 }
@@ -243,24 +249,66 @@ export const SignUpWrapper = styled.div`
       left: 100%;
     }
   }
+`;
 
-  a span:nth-child(2) {
-    top: -100%;
-    right: 0;
-    width: 2px;
+const LoginDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  .login-butt {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #8b80f9;
+    font-size: 16px;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    background: none;
+    border: 2px solid #8b80f9;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .login-butt:hover {
+    background: #8b80f9;
+    color: #fff;
+    box-shadow: 0 0 5px #8b80f9, 0 0 25px #8b80f9, 0 0 50px #8b80f9,
+      0 0 100px #8b80f9;
+  }
+
+  .login-butt:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0%;
     height: 100%;
-    background: linear-gradient(180deg, transparent, #8b80f9);
-    animation: myAnimation 1s linear infinite;
-    animation-delay: 0.25s;
+    background: #8b80f9;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
+    z-index: -1;
   }
 
-  @keyframes myAnimation {
-    0% {
-      top: -100%;
-    }
-    50%,
-    100% {
-      bottom: 100%;
-    }
+  .login-butt:hover:before {
+    width: 100%;
   }
+`;
+
+const SingUpButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LoginLink = styled(Link)`
+  font-weight: 300;
+  font-size: 15px;
+  color: #fc4747;
+  text-decoration: none;
 `;

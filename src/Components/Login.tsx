@@ -15,21 +15,15 @@ function Login() {
           <input type="password" required />
           <label>Password</label>
         </div>
-        <a>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Login
-        </a>
+        <Buttons>
+          <button type="submit" className="login-butt">
+            Login
+          </button>
 
-        <a>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Sign Up
-        </a>
+          <SignUpLink to="/signup" className="signup-butt">
+            Sign Up
+          </SignUpLink>
+        </Buttons>
       </form>
     </LoginWrapper>
   );
@@ -91,43 +85,68 @@ export const LoginWrapper = styled.div`
     }
   }
 
-  form a {
+  form button[type="submit"],
+  .signup-butt {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
     color: #8b80f9;
     font-size: 16px;
-    text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
     transition: 0.5s;
     margin-top: 40px;
     letter-spacing: 4px;
+    background: none;
+    border: 2px solid #8b80f9;
+    border-radius: 5px;
+    cursor: pointer;
   }
 
-  a:hover {
+  button[type="submit"]:hover,
+  .signup-butt:hover {
     background: #8b80f9;
     color: #fff;
-    border-radius: 5px;
     box-shadow: 0 0 5px #8b80f9, 0 0 25px #8b80f9, 0 0 50px #8b80f9,
       0 0 100px #8b80f9;
   }
 
-  a span {
+  button[type="submit"]:before,
+  .signup-butt:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0%;
+    height: 100%;
+    background: #8b80f9;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
+    z-index: -1;
+  }
+
+  button[type="submit"]:hover:before,
+  .signup-butt:hover:before {
+    width: 100%;
+  }
+
+  button[type="submit"] span,
+  .signup-butt span {
     position: absolute;
     display: block;
   }
 
-  a span:nth-child(1) {
+  button[type="submit"] span:nth-child(1),
+  .signup-butt span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
     height: 2px;
     background: linear-gradient(90deg, transparent, #8b80f9);
-    animation: animacaoBotao1 1s linear infinite;
+    animation: myAnimation 1s linear infinite;
   }
 
-  @keyframes animacaoBotao1 {
+  @keyframes myAnimation {
     0% {
       left: -100%;
     }
@@ -136,24 +155,16 @@ export const LoginWrapper = styled.div`
       left: 100%;
     }
   }
+`;
 
-  a span:nth-child(2) {
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(180deg, transparent, #8b80f9);
-    animation: myAnimation 1s linear infinite;
-    animation-delay: 0.25s;
-  }
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
-  @keyframes myAnimation {
-    0% {
-      top: -100%;
-    }
-    50%,
-    100% {
-      bottom: 100%;
-    }
-  }
+const SignUpLink = styled(Link)`
+  font-weight: 300;
+  font-size: 15px;
+  color: #fc4747;
+  text-decoration: none;
 `;
