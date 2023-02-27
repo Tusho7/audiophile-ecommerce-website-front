@@ -8,12 +8,31 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState<File | null>(null);
   const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [avatarError, setAvatarError] = useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!email || !password || !avatar) {
-      console.log("Enter all required fields");
+    if (!email) {
+      console.log("Please enter your email");
+      setEmailError("Please enter your email");
+      return;
+    }
+
+    if (!password) {
+      console.log("Please enter your password");
+      setPasswordError("Please enter your password");
+      return;
+    }
+
+    if (password.length < 8) {
+      setPasswordError("Password must be at least 8 characters long");
+    }
+
+    if (!avatar) {
+      console.log("Please upload your avatar ");
+      setAvatarError("Please upload your avatar");
       return;
     }
     // Validate email format
@@ -48,12 +67,14 @@ function SignUp() {
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+    setPasswordError("");
   };
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setAvatar(file);
+      setAvatarError("");
     }
   };
 
@@ -79,10 +100,11 @@ function SignUp() {
             required
           />
           <label>Password</label>
-          {passw}
+          {passwordError && <p className="error">{passwordError}</p>}
         </div>
         <div className="signup-input">
           <input type="file" accept="image/*" onChange={handleAvatarChange} />
+          {avatarError && <p className="error">{avatarError}</p>}
         </div>
         <button type="submit">Sign Up</button>
       </form>
@@ -149,7 +171,7 @@ export const SignUpWrapper = styled.div`
 
     .error {
       position: absolute;
-      top: 40px;
+      top: 45px;
       left: 0;
       bottom: -20px;
       font-size: 14px;
