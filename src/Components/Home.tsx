@@ -1,28 +1,25 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import hamburgerIcon from "../Images/icon-hamburger.svg";
-import productIcon from "../Images/icon-product.svg";
-import Logo from "../Images/logo.svg";
-import PatternCircle from "../Images/pattern-circles.svg";
-import FbLogo from "../Images/icon-facebook.svg";
-import TwitterLogo from "../Images/icon-twitter.svg";
-import InstagramLogo from "../Images/icon-instagram.svg";
 
 function Home() {
   return (
     <div>
       <NavigationContainer>
         <div>
-          <img src={hamburgerIcon} />
+          <img
+            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-hamburger.svg`}
+          />
         </div>
 
         <div>
-          <img src={Logo} />
+          <img
+            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/logo.svg`}
+          />
         </div>
 
         <div>
-          <img src={productIcon} />
+          <img
+            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-cart.svg`}
+          />
         </div>
       </NavigationContainer>
 
@@ -46,7 +43,9 @@ function Home() {
       </HeaderContainer>
 
       <OrangeContainer>
-        <PatternImg src={PatternCircle} />
+        <PatternImg
+          src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/pattern-circles.svg`}
+        />
 
         <SpeakerImgContainer>
           <SpeakerImg
@@ -115,7 +114,9 @@ function Home() {
       </BestGearContainer>
 
       <FooterContainer>
-        <img src={Logo} />
+        <img
+          src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/logo.svg`}
+        />
         <FooterTexts>
           <p>Home</p>
           <p>HEADPHONES</p>
@@ -133,9 +134,15 @@ function Home() {
         <Description>Copyright 2021. All Rights Reserved</Description>
 
         <FooterIcons>
-          <img src={FbLogo} />
-          <img src={TwitterLogo} />
-          <img src={InstagramLogo} />
+          <img
+            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-facebook.svg`}
+          />
+          <img
+            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-twitter.svg`}
+          />
+          <img
+            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-instagram.svg`}
+          />
         </FooterIcons>
       </FooterContainer>
     </div>
