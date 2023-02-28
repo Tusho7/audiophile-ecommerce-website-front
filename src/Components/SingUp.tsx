@@ -77,48 +77,55 @@ function SignUp() {
   };
 
   return (
-    <SignUpWrapper>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="signup-input">
-          <input
-            type="text"
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
-          <label>Email</label>
-          {emailError && <p className="error">{emailError}</p>}
-        </div>
-        <div className="signup-input">
-          <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-          <label>Password</label>
-          {passwordError && <p className="error">{passwordError}</p>}
-        </div>
-        <div className="signup-input">
-          <input type="file" accept="image/*" onChange={handleAvatarChange} />
-          {avatarError && <p className="error">{avatarError}</p>}
-        </div>
-        <SingUpButton>
-          <button type="submit">Sign Up</button>
-        </SingUpButton>
-      </form>
-      <LoginDiv>
-        <p>Already have an account?</p>
-        <LoginLink to="/login" className="login-butt">
-          Login
-        </LoginLink>
-      </LoginDiv>
-    </SignUpWrapper>
+    <SignUpContainer>
+      <SignUpWrapper>
+        <h2>Sign Up</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="signup-input">
+            <input
+              type="text"
+              value={email}
+              onChange={handleEmailChange}
+              required
+            />
+            <label>Email</label>
+            {emailError && <p className="error">{emailError}</p>}
+          </div>
+          <div className="signup-input">
+            <input
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              required
+            />
+            <label>Password</label>
+            {passwordError && <p className="error">{passwordError}</p>}
+          </div>
+          <div className="signup-input">
+            <input type="file" accept="image/*" onChange={handleAvatarChange} />
+            {avatarError && <p className="error">{avatarError}</p>}
+          </div>
+          <SingUpButton>
+            <button type="submit">Sign Up</button>
+          </SingUpButton>
+        </form>
+        <LoginDiv>
+          <p>Already have an account?</p>
+          <LoginLink to="/login" className="login-butt">
+            Login
+          </LoginLink>
+        </LoginDiv>
+      </SignUpWrapper>
+    </SignUpContainer>
   );
 }
 
 export default SignUp;
+
+const SignUpContainer = styled.div`
+  background: linear-gradient(#8b80f9, #212123);
+  min-height: 100vh;
+`;
 
 export const SignUpWrapper = styled.div`
   position: absolute;

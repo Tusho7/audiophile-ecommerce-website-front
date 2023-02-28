@@ -4,32 +4,39 @@ import "../index.css";
 
 function Login() {
   return (
-    <LoginWrapper>
-      <h2>Login</h2>
-      <form>
-        <div className="login-input">
-          <input type="text" required />
-          <label>Email</label>
-        </div>
-        <div className="login-input">
-          <input type="password" required />
-          <label>Password</label>
-        </div>
-        <Buttons>
-          <button type="submit" className="login-butt">
-            Login
-          </button>
+    <LoginContainer>
+      <LoginWrapper>
+        <h2>Login</h2>
+        <form>
+          <div className="login-input">
+            <input type="text" required />
+            <label>Email</label>
+          </div>
+          <div className="login-input">
+            <input type="password" required />
+            <label>Password</label>
+          </div>
+          <Buttons>
+            <button type="submit" className="login-butt">
+              Login
+            </button>
 
-          <SignUpLink to="/signup" className="signup-butt">
-            Sign Up
-          </SignUpLink>
-        </Buttons>
-      </form>
-    </LoginWrapper>
+            <SignUpLink to="/signup" className="signup-butt">
+              Sign Up
+            </SignUpLink>
+          </Buttons>
+        </form>
+      </LoginWrapper>
+    </LoginContainer>
   );
 }
 
 export default Login;
+
+const LoginContainer = styled.div`
+  background: linear-gradient(#8b80f9, #212123);
+  min-height: 100vh;
+`;
 
 export const LoginWrapper = styled.div`
   position: absolute;
