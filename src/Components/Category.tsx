@@ -66,7 +66,9 @@ const CategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 68px;
-  margin-top: 130px;
+  width: 87%;
+  margin: auto;
+  margin-top: 92px;
 `;
 
 const CategoryDiv = styled.div`
@@ -91,8 +93,7 @@ const CategoryPictures = styled.div`
 
 const Image = styled.img`
   position: absolute;
-  top: -40px;
-  left: 115px;
+  transform: translate(-50%, -30%);
   width: 140px;
   height: 120px;
 `;

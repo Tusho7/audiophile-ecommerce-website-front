@@ -1,3 +1,4 @@
+import Category from "./Category";
 import {
   NavigationContainer,
   Line,
@@ -77,6 +78,8 @@ function Home() {
           <ProductButton>SEE PRODUCT</ProductButton>
         </HeaderTexts>
       </HeaderContainer>
+
+      <Category />
 
       <OrangeContainer>
         <PatternImg
