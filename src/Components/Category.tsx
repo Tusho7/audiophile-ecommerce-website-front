@@ -4,11 +4,11 @@ function Category() {
   return (
     <CategoryContainer>
       <CategoryDiv>
-        <div>
+        <CategoryPictures>
           <Image
             src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/shared/image-category-thumbnail-headphones.png`}
           />
-        </div>
+        </CategoryPictures>
 
         <TitleAndShopContainer>
           <p>HEADPHONES</p>
@@ -85,8 +85,16 @@ const ShopContainer = styled.div`
   padding-bottom: 22px;
 `;
 
+const CategoryPictures = styled.div`
+  position: relative;
+`;
+
 const Image = styled.img`
   position: absolute;
+  top: -40px;
+  left: 115px;
+  width: 140px;
+  height: 120px;
 `;
 
 const TitleAndShopContainer = styled.div`
