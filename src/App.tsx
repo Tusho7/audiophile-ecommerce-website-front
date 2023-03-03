@@ -5,9 +5,11 @@ import Home from "./Components/Home";
 import Category from "./Components/Category";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ProductType } from "./Components/types";
+import Product from "./Components/Product";
 
 function App() {
-  const [data, setData] = useState("");
+  const [data, setData] = useState<ProductType[]>([]);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -16,7 +18,6 @@ function App() {
           "https://audiophile-ecommerce-tunt.onrender.com/api/products"
         );
         setData(response.data);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -31,6 +32,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
+        <Route path="/products/:id" element={<Product data={data} />} />
       </Routes>
     </div>
   );
