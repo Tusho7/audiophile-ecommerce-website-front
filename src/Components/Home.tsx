@@ -28,14 +28,6 @@ import {
   DarkDivImg,
   SecondContainer,
   Yx1Text,
-  BestGearContainer,
-  BestGearImg,
-  BestGearTitle,
-  BestGearText,
-  FooterContainer,
-  FooterTexts,
-  Description,
-  FooterIcons,
 } from "./styles";
 
 function Home() {
