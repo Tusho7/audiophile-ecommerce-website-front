@@ -1,39 +1,30 @@
-import { useParams } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
-import Category from "./Category";
 import Navigation from "./Navigation";
 import { Line } from "./styles";
 import { ProductProps, ProductType } from "./types";
 
-function Product({ data }: ProductProps) {
-  const { id } = useParams<{ id?: string }>();
-  const product = data.filter(
-    (product: ProductType) => parseInt(id ?? "0") === product.id
-  );
-  console.log(product);
-
+function Product({ category, data }: ProductProps) {
+  const filteredData = data.filter((item) => item.category === category);
+  console.log(filteredData);
   return (
     <div>
       <Navigation />
       <Line />
+      <TitleContainer>
+        <H2>{category.toUpperCase()}</H2>
+      </TitleContainer>
 
-      <CategoryContainer>
-        <h2>{product[0]?.category}</h2>
-      </CategoryContainer>
-
-      {product.map((product: ProductType) => (
-        <Container key={product.id}>
-          <Img
+      {filteredData.map((product: ProductType) => (
+        <ProductsContainer key="">
+          <ProductImg
             src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${product.image.mobile}`}
           />
-
           <div>
-            {product.new && <h2>NEW PRODUCT</h2>}
-            <p>{product.name}</p>
-            <p>{product.description}</p>
-            <button>SEE PRODUCT</button>
+            {product.new && <p>NEW PRODUCT</p>}
+            <h1>{product.name}</h1>
           </div>
-        </Container>
+        </ProductsContainer>
       ))}
     </div>
   );
@@ -41,26 +32,32 @@ function Product({ data }: ProductProps) {
 
 export default Product;
 
-const CategoryContainer = styled.div`
-  width: 100%;
-  text-transform: uppercase;
-  padding: 32px 84px;
+const TitleContainer = styled.div`
   background-color: #191919;
+`;
+
+const H2 = styled.h2`
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 38px;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   color: #ffffff;
+  padding-top: 32px;
+  padding-bottom: 32px;
+`;
+
+const ProductsContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 32px;
 `;
 
-const Container = styled.div`
-  width: 87%;
-  margin: auto;
-  border-radius: 8px;
-  margin-top: 64px;
-`;
-
-const Img = styled.img`
-  width: 100%;
-  height: auto;
+const ProductImg = styled.img`
+  width: 327px;
+  height: 357px;
   border-radius: 8px;
 `;

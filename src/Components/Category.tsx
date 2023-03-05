@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Category() {
@@ -13,7 +14,10 @@ function Category() {
         <TitleAndShopContainer>
           <p>HEADPHONES</p>
           <ShopContainer>
-            <p>SHOP</p>
+            <Link to="/products/headphones">
+              <p>SHOP</p>
+            </Link>
+
             <img
               src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
             />
@@ -31,7 +35,9 @@ function Category() {
         <TitleAndShopContainer>
           <p>SPEAKERS</p>
           <ShopContainer>
-            <p>SHOP</p>
+            <Link to="/products/speakers">
+              <p>SHOP</p>
+            </Link>
             <img
               src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
             />
@@ -49,7 +55,9 @@ function Category() {
         <TitleAndShopContainer>
           <p>EARPHONES</p>
           <ShopContainer>
-            <p>SHOP</p>
+            <Link to="/products/earphones">
+              <p>SHOP</p>
+            </Link>
             <img
               src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
             />

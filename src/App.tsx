@@ -32,7 +32,18 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
-        <Route path="/products/:id" element={<Product data={data} />} />
+        <Route
+          path="/products/headphones"
+          element={<Product category="headphones" data={data} />}
+        />
+        <Route
+          path="/products/speakers"
+          element={<Product category="speakers" data={data} />}
+        />
+        <Route
+          path="/products/earphones"
+          element={<Product category="earphones" data={data} />}
+        />
       </Routes>
     </div>
   );

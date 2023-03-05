@@ -1,5 +1,6 @@
 export interface ProductProps {
   data: ProductType[];
+  category: string;
 }
 
 export interface ProductType {
@@ -57,3 +58,7 @@ export interface ProductType {
     };
   };
 }
+
+export type PropsType = {
+  data: ProductType[];
+};
