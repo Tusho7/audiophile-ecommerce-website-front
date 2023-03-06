@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import BestGear from "./BestGear";
+import Category from "./Category";
 import Navigation from "./Navigation";
-import { Line } from "./styles";
+import { Line, ProductButton } from "./styles";
 import { ProductProps, ProductType } from "./types";
 
 function Product({ category, data }: ProductProps) {
   const filteredData = data.filter((item) => item.category === category);
-  console.log(filteredData);
   return (
     <div>
       <Navigation />
@@ -16,16 +17,21 @@ function Product({ category, data }: ProductProps) {
       </TitleContainer>
 
       {filteredData.map((product: ProductType) => (
-        <ProductsContainer key="">
+        <ProductsContainer key={product.id}>
           <ProductImg
             src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${product.image.mobile}`}
           />
-          <div>
-            {product.new && <p>NEW PRODUCT</p>}
-            <h1>{product.name}</h1>
-          </div>
+          <ProductDescriptionContainer>
+            {product.new && <NewProduct>NEW PRODUCT</NewProduct>}
+            <ProductTitle>{product.name}</ProductTitle>
+            <ProductDescription>{product.description}</ProductDescription>
+            <ProductButton>SEE PRODUCT</ProductButton>
+          </ProductDescriptionContainer>
         </ProductsContainer>
       ))}
+
+      <Category />
+      <BestGear />
     </div>
   );
 }
@@ -54,10 +60,50 @@ const ProductsContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 32px;
+  margin-top: 64px;
 `;
 
 const ProductImg = styled.img`
   width: 327px;
   height: 357px;
   border-radius: 8px;
+`;
+
+const ProductDescriptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+`;
+
+const NewProduct = styled.p`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  color: #d87d4a;
+`;
+
+const ProductTitle = styled.p`
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 38px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #000000;
+`;
+
+const ProductDescription = styled.p`
+  width: 87%;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 25px;
+  text-align: center;
+  color: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.5;
 `;
