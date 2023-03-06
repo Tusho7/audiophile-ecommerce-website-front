@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ProductType } from "./Components/types";
 import Product from "./Components/Product";
+import Detail from "./Components/Detail";
 
 function App() {
   const [data, setData] = useState<ProductType[]>([]);
@@ -32,17 +33,18 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
+        <Route path="/products/:category" element={<Product data={data} />} />
         <Route
-          path="/products/headphones"
-          element={<Product category="headphones" data={data} />}
+          path="/products/:slug/detail"
+          element={<Detail data={data} category={""} />}
         />
         <Route
-          path="/products/speakers"
-          element={<Product category="speakers" data={data} />}
+          path="/products/:slug/detail"
+          element={<Detail data={data} category={""} />}
         />
         <Route
-          path="/products/earphones"
-          element={<Product category="earphones" data={data} />}
+          path="/products/:slug/detail"
+          element={<Detail data={data} category={""} />}
         />
       </Routes>
     </div>

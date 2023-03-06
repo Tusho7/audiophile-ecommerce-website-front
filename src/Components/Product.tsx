@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import BestGear from "./BestGear";
 import Category from "./Category";
@@ -6,8 +7,16 @@ import Navigation from "./Navigation";
 import { Line, ProductButton } from "./styles";
 import { ProductProps, ProductType } from "./types";
 
-function Product({ category, data }: ProductProps) {
+function Product({ data }: ProductProps) {
+  const { category = "" } = useParams<{ category?: string }>();
   const filteredData = data.filter((item) => item.category === category);
+  if (!category) {
+    return (
+      <div>
+        <h2>No Products Found</h2>
+      </div>
+    );
+  }
   return (
     <div>
       <Navigation />
@@ -16,19 +25,22 @@ function Product({ category, data }: ProductProps) {
         <H2>{category.toUpperCase()}</H2>
       </TitleContainer>
 
-      {filteredData.map((product: ProductType) => (
-        <ProductsContainer key={product.id}>
-          <ProductImg
-            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${product.image.mobile}`}
-          />
-          <ProductDescriptionContainer>
-            {product.new && <NewProduct>NEW PRODUCT</NewProduct>}
-            <ProductTitle>{product.name}</ProductTitle>
-            <ProductDescription>{product.description}</ProductDescription>
-            <ProductButton>SEE PRODUCT</ProductButton>
-          </ProductDescriptionContainer>
-        </ProductsContainer>
-      ))}
+      {filteredData.length > 0 &&
+        filteredData.map((product: ProductType) => (
+          <ProductsContainer key={product.id}>
+            <ProductImg
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${product.image.mobile}`}
+            />
+            <ProductDescriptionContainer>
+              {product.new && <NewProduct>NEW PRODUCT</NewProduct>}
+              <ProductTitle>{product.name}</ProductTitle>
+              <ProductDescription>{product.description}</ProductDescription>
+              <Link to={`/products/${product.slug}/detail`}>
+                <ProductButton>SEE PRODUCT</ProductButton>
+              </Link>
+            </ProductDescriptionContainer>
+          </ProductsContainer>
+        ))}
 
       <Category />
       <BestGear />
