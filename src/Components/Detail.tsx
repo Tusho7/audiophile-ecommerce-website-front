@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Navigation from "./Navigation";
@@ -6,6 +7,7 @@ import { ProductProps, ProductType } from "./types";
 function Detail({ data }: ProductProps) {
   const { slug } = useParams<{ slug: string }>();
   const result = data.find((item: ProductType) => item.slug === slug);
+  const [quantity, setQuantity] = useState(1);
 
   if (!result) {
     return (
@@ -14,6 +16,18 @@ function Detail({ data }: ProductProps) {
       </div>
     );
   }
+
+  const decrease = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    } else {
+      return;
+    }
+  };
+
+  const increase = () => {
+    setQuantity(quantity + 1);
+  };
 
   return (
     <div>
@@ -31,9 +45,13 @@ function Detail({ data }: ProductProps) {
           <Price>{`$ ${result.price.toLocaleString()}`}</Price>
           <QuantityAndButton>
             <QuantityCont>
-              <p>fas</p>
-              <p>2</p>
-              <p>2</p>
+              <IncreaseDecreaseButton onClick={decrease}>
+                -
+              </IncreaseDecreaseButton>
+              <p>{quantity}</p>
+              <IncreaseDecreaseButton onClick={increase}>
+                +
+              </IncreaseDecreaseButton>
             </QuantityCont>
             <AddToCartButton>Add to cart</AddToCartButton>
           </QuantityAndButton>
@@ -87,7 +105,7 @@ const ProductTitle = styled.p`
 `;
 
 const ProductDescription = styled.p`
-  width: 87%;
+  width: 100%;
   font-weight: 500;
   font-size: 15px;
   line-height: 25px;
@@ -105,10 +123,14 @@ const QuantityAndButton = styled.div`
 `;
 
 const QuantityCont = styled.div`
+  width: 45%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
+  background: #f1f1f1;
+  padding: 15px;
+  border-radius: 8px;
 
   font-weight: 700;
   font-size: 13px;
@@ -117,6 +139,19 @@ const QuantityCont = styled.div`
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #000000;
+`;
+
+const IncreaseDecreaseButton = styled.button`
+  border: none;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.25;
 `;
 
 const Price = styled.p`
