@@ -55,6 +55,21 @@ function Detail({ data }: ProductProps) {
             </QuantityCont>
             <AddToCartButton>Add to cart</AddToCartButton>
           </QuantityAndButton>
+
+          <FeaturesContainer>
+            <FeaturesTitle>FEATURES</FeaturesTitle>
+            <FeaturesText>{result.features}</FeaturesText>
+
+            <h3>IN THE BOX</h3>
+            <div>
+              {Object.entries(result.includes).map(([key, value]) => (
+                <IncludesCont>
+                  <Quantity key={key}>{value.quantity + "x"}</Quantity>
+                  <Item>{value.item}</Item>
+                </IncludesCont>
+              ))}
+            </div>
+          </FeaturesContainer>
         </ProductInfo>
       </DetailContainer>
     </div>
@@ -181,4 +196,51 @@ const AddToCartButton = styled.button`
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #ffffff;
+`;
+
+const FeaturesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const FeaturesTitle = styled.h3`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 0.857143px;
+  text-transform: uppercase;
+  color: #000000;
+`;
+
+const FeaturesText = styled.p`
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 25px;
+  color: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+`;
+
+const IncludesCont = styled.div`
+  display: flex;
+  gap: 24px;
+  padding-bottom: 8px;
+  align-items: center;
+`;
+
+const Quantity = styled.p`
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 25px;
+  color: #d87d4a;
+`;
+
+const Item = styled.p`
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 25px;
+  color: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.5;
 `;
