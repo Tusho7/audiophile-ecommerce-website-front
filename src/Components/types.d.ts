@@ -62,3 +62,11 @@ export interface ProductType {
 export type PropsType = {
   data: ProductType[];
 };
+
+export type AlsoProps = {
+  slug: string;
+  image: {
+    mobile: string;
+  };
+  name: string;
+};

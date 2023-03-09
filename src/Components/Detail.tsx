@@ -5,6 +5,8 @@ import BestGear from "./BestGear";
 import Category from "./Category";
 import Navigation from "./Navigation";
 import { ProductProps, ProductType } from "./types";
+import YouMayLike from "./YouMayLike";
+import YouMaleLike from "./YouMayLike";
 
 function Detail({ data }: ProductProps) {
   const { slug } = useParams<{ slug: string }>();
@@ -34,7 +36,7 @@ function Detail({ data }: ProductProps) {
   return (
     <div>
       <Navigation />
-      <p>Go Back</p>
+      <GoBack>Go Back</GoBack>
 
       <DetailContainer>
         <ProductImg
@@ -73,14 +75,26 @@ function Detail({ data }: ProductProps) {
             </div>
           </FeaturesContainer>
         </ProductInfo>
-        <Category />
-        <BestGear />
       </DetailContainer>
+      <YouMayLike data={data} />
+      <Category />
+      <BestGear />
     </div>
   );
 }
 
 export default Detail;
+
+const GoBack = styled.p`
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 25px;
+  color: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  padding-top: 16px;
+  padding-left: 24px;
+`;
 
 const DetailContainer = styled.div`
   display: flex;
