@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import BestGear from "./BestGear";
+import Category from "./Category";
 import Navigation from "./Navigation";
 import { ProductProps, ProductType } from "./types";
 
@@ -71,6 +73,8 @@ function Detail({ data }: ProductProps) {
             </div>
           </FeaturesContainer>
         </ProductInfo>
+        <Category />
+        <BestGear />
       </DetailContainer>
     </div>
   );
