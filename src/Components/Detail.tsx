@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import BestGear from "./BestGear";
 import Category from "./Category";
@@ -36,7 +36,9 @@ function Detail({ data }: ProductProps) {
   return (
     <div>
       <Navigation />
-      <GoBack>Go Back</GoBack>
+      <Link to={`/products/${result?.category}`}>
+        <GoBack>Go Back</GoBack>
+      </Link>
 
       <DetailContainer>
         <ProductImg
@@ -75,9 +77,23 @@ function Detail({ data }: ProductProps) {
             </div>
           </FeaturesContainer>
         </ProductInfo>
+        <GalleryImagesContainer>
+          <TwoGalleryImagesContainer>
+            <img
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${result.gallery.first.mobile}`}
+            />
+            <img
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${result.gallery.second.mobile}`}
+            />
+          </TwoGalleryImagesContainer>
+          <ThirdGalleryImg
+            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${result.gallery.third.mobile}`}
+          />
+        </GalleryImagesContainer>
       </DetailContainer>
       <YouMayLike data={data} />
       <Category />
+      <Padding></Padding>
       <BestGear />
     </div>
   );
@@ -103,6 +119,10 @@ const DetailContainer = styled.div`
   flex-wrap: wrap;
   gap: 32px;
   margin-top: 24px;
+`;
+
+const Padding = styled.div`
+  padding-top: 120px;
 `;
 
 const ProductImg = styled.img`
@@ -220,6 +240,34 @@ const FeaturesContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+`;
+
+const GalleryImagesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const TwoGalleryImagesContainer = styled.div`
+  width: 87%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+`;
+
+const ThirdGalleryImg = styled.img`
+  width: 87%;
+  height: 368px;
+  border-radius: 8px;
 `;
 
 const FeaturesTitle = styled.h3`

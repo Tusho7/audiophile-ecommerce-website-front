@@ -93,6 +93,19 @@ const ShopContainer = styled.div`
   align-items: center;
   margin-top: 17px;
   padding-bottom: 22px;
+  p {
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #000000;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+  }
+  a {
+    text-decoration: none;
+  }
 `;
 
 const CategoryPictures = styled.div`
