@@ -77,6 +77,7 @@ const CategoryContainer = styled.div`
   width: 87%;
   margin: auto;
   margin-top: 92px;
+  padding-bottom: 35px;
 `;
 
 const CategoryDiv = styled.div`

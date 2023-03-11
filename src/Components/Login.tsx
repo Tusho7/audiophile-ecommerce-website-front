@@ -2,22 +2,33 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "../index.css";
 
-function Login() {
+function Login({ handleSubmit, email, setEmail, password, setPassword }: any) {
   return (
     <LoginContainer>
       <LoginWrapper>
         <h2>Login</h2>
         <form>
           <div className="login-input">
-            <input type="text" required />
+            <input
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <label>Email</label>
           </div>
           <div className="login-input">
-            <input type="password" required />
+            <input
+              type="password"
+              value={password}
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <label>Password</label>
           </div>
+
           <Buttons>
-            <button type="submit" className="login-butt">
+            <button type="submit" className="login-butt" onClick={handleSubmit}>
               Login
             </button>
 

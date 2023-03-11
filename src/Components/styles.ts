@@ -74,7 +74,7 @@ export const ProductButton = styled.button`
 export const OrangeContainer = styled.div`
   width: 87%;
   margin: auto;
-  margin-top: 120px;
+  margin-top: 85px;
   overflow-x: hidden;
   padding-bottom: 55px;
   text-align: center;

@@ -6,7 +6,6 @@ import Category from "./Category";
 import Navigation from "./Navigation";
 import { ProductProps, ProductType } from "./types";
 import YouMayLike from "./YouMayLike";
-import YouMaleLike from "./YouMayLike";
 
 function Detail({ data }: ProductProps) {
   const { slug } = useParams<{ slug: string }>();
@@ -69,7 +68,7 @@ function Detail({ data }: ProductProps) {
             <h3>IN THE BOX</h3>
             <div>
               {Object.entries(result.includes).map(([key, value]) => (
-                <IncludesCont>
+                <IncludesCont key={key}>
                   <Quantity key={key}>{value.quantity + "x"}</Quantity>
                   <Item>{value.item}</Item>
                 </IncludesCont>

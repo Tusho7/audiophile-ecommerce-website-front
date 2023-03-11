@@ -6,10 +6,6 @@ function Navigation() {
 
   const toggleVisible = () => {
     setToggle(!toggle);
-    console.log(toggle);
-    <div>
-      <h2>Hello</h2>
-    </div>;
   };
 
   return (
@@ -40,6 +36,3 @@ function Navigation() {
 }
 
 export default Navigation;
-function usestate(arg0: boolean): [any, any] {
-  throw new Error("Function not implemented.");
-}

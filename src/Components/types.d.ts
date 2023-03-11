@@ -70,3 +70,10 @@ export type AlsoProps = {
   };
   name: string;
 };
+
+export interface User {
+  avatar: "";
+  email: "";
+  iat: 0;
+  id: "";
+}
