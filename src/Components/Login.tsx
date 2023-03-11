@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "../index.css";
+import { LogIn } from "./types";
 
-function Login({ handleSubmit, email, setEmail, password, setPassword }: any) {
+function Login({
+  handleSubmit,
+  email,
+  setEmail,
+  password,
+  setPassword,
+}: LogIn) {
   return (
     <LoginContainer>
       <LoginWrapper>

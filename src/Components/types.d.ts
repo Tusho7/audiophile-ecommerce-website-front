@@ -77,3 +77,11 @@ export interface User {
   iat: 0;
   id: "";
 }
+
+export interface LogIn {
+  email: string;
+  setEmail: (e: string) => void;
+  password: string;
+  setPassword: (p: string) => void;
+  handleSubmit: (e: { preventDefault: () => void }) => void;
+}
