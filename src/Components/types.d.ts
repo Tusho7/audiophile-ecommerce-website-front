@@ -8,6 +8,7 @@ export interface ProductType {
   _id: string;
   slug: string;
   name: string;
+  quantity: number;
   image: {
     mobile: string;
     tablet: string;
@@ -84,4 +85,13 @@ export interface LogIn {
   password: string;
   setPassword: (p: string) => void;
   handleSubmit: (e: { preventDefault: () => void }) => void;
+}
+
+export interface CartType {
+  image: string;
+  name: string;
+  number: number;
+  price: string;
+  userId: string;
+  _id: string;
 }

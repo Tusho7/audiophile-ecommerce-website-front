@@ -1,11 +1,18 @@
+import { CallTracker } from "assert";
 import { useState } from "react";
+import Cart from "./Cart";
 import Category from "./Category";
 import { NavigationContainer } from "./styles";
 function Navigation() {
   const [toggle, setToggle] = useState(false);
+  const [cartModal, setCartModal] = useState(false);
 
   const toggleVisible = () => {
     setToggle(!toggle);
+  };
+
+  const handleClick = () => {
+    setCartModal(!cartModal);
   };
 
   return (
@@ -23,7 +30,7 @@ function Navigation() {
           />
         </div>
 
-        <div>
+        <div onClick={handleClick}>
           <img
             src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-cart.svg`}
           />
@@ -31,6 +38,7 @@ function Navigation() {
       </NavigationContainer>
 
       {toggle && <Category />}
+      {cartModal && <Cart />}
     </div>
   );
 }

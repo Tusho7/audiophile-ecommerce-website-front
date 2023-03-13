@@ -4,7 +4,7 @@ import axios from "axios";
 import "../index.css";
 import { Link } from "react-router-dom";
 
-function SignUp() {
+function SignUp({ setUser }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState<File | null>(null);
@@ -53,6 +53,7 @@ function SignUp() {
         formData
       );
       console.log(response.data);
+      setUser(response.data);
     } catch (error) {
       console.error(error);
     }

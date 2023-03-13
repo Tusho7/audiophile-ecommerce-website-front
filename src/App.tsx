@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { ProductType, User } from "./Components/types";
 import Product from "./Components/Product";
 import Detail from "./Components/Detail";
+import Cart from "./Components/Cart";
 
 function App() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [cart, setCart] = useState("");
 
   useEffect(() => {
     const getProducts = async () => {
@@ -94,16 +96,23 @@ function App() {
             />
             <Route
               path="/products/:slug/detail"
-              element={<Detail data={data} category={""} />}
+              element={
+                <Detail data={data} category={""} cart={[]} setCart={setCart} />
+              }
             />
             <Route
               path="/products/:slug/detail"
-              element={<Detail data={data} category={""} />}
+              element={
+                <Detail data={data} category={""} cart={[]} setCart={setCart} />
+              }
             />
             <Route
               path="/products/:slug/detail"
-              element={<Detail data={data} category={""} />}
+              element={
+                <Detail data={data} category={""} cart={[]} setCart={setCart} />
+              }
             />
+            <Route path="/cart" element={<Cart user={user} />} />
           </>
         ) : (
           <>
@@ -119,7 +128,10 @@ function App() {
                 />
               }
             />
-            <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/signup"
+              element={<SignUp user={user} setUser={setUser} />}
+            />
           </>
         )}
       </Routes>

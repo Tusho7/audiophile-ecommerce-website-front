@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -7,10 +8,15 @@ import Navigation from "./Navigation";
 import { ProductProps, ProductType } from "./types";
 import YouMayLike from "./YouMayLike";
 
-function Detail({ data }: ProductProps) {
+function Detail({
+  data,
+  cart,
+  setCart,
+}: ProductProps & { cart: ProductType[]; setCart: Function }) {
   const { slug } = useParams<{ slug: string }>();
   const result = data.find((item: ProductType) => item.slug === slug);
   const [quantity, setQuantity] = useState(1);
+  const [number, setNumber] = useState<Number>(1);
 
   if (!result) {
     return (
@@ -30,6 +36,27 @@ function Detail({ data }: ProductProps) {
 
   const increase = () => {
     setQuantity(quantity + 1);
+  };
+
+  const cartButton = async () => {
+    const data = {
+      name: result.name,
+      number,
+      price: result.price,
+      image: result.image.mobile,
+      userId: result.id,
+    };
+    try {
+      const res = await axios.post(
+        "https://curious-pear-anemone.cyclic.app/api/cart",
+        data
+      );
+      if (res && res.data) {
+        console.log(res.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -58,7 +85,7 @@ function Detail({ data }: ProductProps) {
                 +
               </IncreaseDecreaseButton>
             </QuantityCont>
-            <AddToCartButton>Add to cart</AddToCartButton>
+            <AddToCartButton onClick={cartButton}>Add to cart</AddToCartButton>
           </QuantityAndButton>
 
           <FeaturesContainer>
