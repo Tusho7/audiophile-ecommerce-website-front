@@ -19,12 +19,20 @@ function Cart({ user }: any) {
       setIsLoading(false);
     };
     getCarts();
-  }, [cart]);
+  }, [user, cart]);
 
   const removeFunction = async (id: string | undefined) => {
-    const res = await axios.delete(
-      `https://curious-pear-anemone.cyclic.app/api/carts/${id}`
-    );
+    console.log(id);
+    try {
+      const res = await axios.delete(
+        `https://audiophile-ecommerce-tunt.onrender.com/api/carts/${id}`
+      );
+      console.log(res.data);
+      console.log("Cart deleted");
+    } catch (error) {
+      console.error(error);
+      console.log("Error deleting cart");
+    }
   };
 
   const totalPrice = cart.reduce(
@@ -47,14 +55,14 @@ function Cart({ user }: any) {
             <H1>CART</H1>
             {isLoading && result.length === 0 && <p>Cart is empty</p>}
             {cart.length !== 0 && (
-              <RemoveButton onClick={() => removeFunction(user.id)}>
+              <RemoveButton onClick={() => removeFunction(user?._id)}>
                 Remove all
               </RemoveButton>
             )}
           </CartAndDeleteContainer>
           <ContentContainer>
             {cart.map((item: CartType) => (
-              <CartSecondContainer>
+              <CartSecondContainer key={item._id}>
                 <Img
                   src={`https://curious-pear-anemone.cyclic.app/allImages/${item.image}`}
                 />
