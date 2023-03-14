@@ -40,62 +40,75 @@ function Cart({ user }: any) {
     .replace(/\.00$/, "");
 
   return (
-    <CartContainer>
-      <div>
-        <CartAndDeleteContainer>
-          <H1>CART</H1>
-          {isLoading && result.length === 0 && <p>Cart is empty</p>}
-          {cart.length !== 0 && (
-            <RemoveButton onClick={() => removeFunction(user.id)}>
-              Remove all
-            </RemoveButton>
-          )}
-        </CartAndDeleteContainer>
-        <ContentContainer>
-          {cart.map((item: CartType) => (
-            <CartSecondContainer>
-              <Img
-                src={`https://curious-pear-anemone.cyclic.app/allImages/${item.image}`}
-              />
-              <NameAndPrice>
-                <Name>
-                  {item.name
-                    .replace(/Headphones|Speakers|Earphones/gi, "")
-                    .replace(/\bMark\b/gi, "MK")
-                    .trim()}
-                </Name>
+    <Modal>
+      <CartContainer>
+        <div>
+          <CartAndDeleteContainer>
+            <H1>CART</H1>
+            {isLoading && result.length === 0 && <p>Cart is empty</p>}
+            {cart.length !== 0 && (
+              <RemoveButton onClick={() => removeFunction(user.id)}>
+                Remove all
+              </RemoveButton>
+            )}
+          </CartAndDeleteContainer>
+          <ContentContainer>
+            {cart.map((item: CartType) => (
+              <CartSecondContainer>
+                <Img
+                  src={`https://curious-pear-anemone.cyclic.app/allImages/${item.image}`}
+                />
+                <NameAndPrice>
+                  <Name>
+                    {item.name
+                      .replace(/Headphones|Speakers|Earphones/gi, "")
+                      .replace(/\bMark\b/gi, "MK")
+                      .trim()}
+                  </Name>
 
-                <p>{`$ ${parseFloat(item.price) * item.number}
+                  <p>{`$ ${parseFloat(item.price) * item.number}
 `}</p>
-              </NameAndPrice>
+                </NameAndPrice>
 
-              <QuantityContainer>
-                <button>-</button>
-                <p>{item.number}</p>
-                <button>+</button>
-              </QuantityContainer>
-            </CartSecondContainer>
-          ))}
-        </ContentContainer>
-      </div>
+                <QuantityContainer>
+                  <button>-</button>
+                  <p>{item.number}</p>
+                  <button>+</button>
+                </QuantityContainer>
+              </CartSecondContainer>
+            ))}
+          </ContentContainer>
+        </div>
 
-      <TotalContainer>
-        <p>TOTAL</p>
-        <p>{formattedTotal}</p>
-      </TotalContainer>
+        <TotalContainer>
+          <p>TOTAL</p>
+          <p>{formattedTotal}</p>
+        </TotalContainer>
 
-      <CheckoutButton>CHECKOUT</CheckoutButton>
-    </CartContainer>
+        <CheckoutButton>CHECKOUT</CheckoutButton>
+      </CartContainer>
+    </Modal>
   );
 }
 
 export default Cart;
 
+const Modal = styled.div`
+  position: fixed;
+  z-index: 99999999;
+  left: 0;
+  top: 105px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow-y: hidden;
+`;
+
 const CartContainer = styled.div`
   width: 87%;
   margin: auto;
   margin-top: 24px;
-  background: red;
+  background: #ffffff;
   border-radius: 8px;
   padding: 32px 28px;
 `;

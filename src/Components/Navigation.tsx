@@ -1,5 +1,5 @@
 import { CallTracker } from "assert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cart from "./Cart";
 import Category from "./Category";
 import { NavigationContainer } from "./styles";
@@ -9,11 +9,27 @@ function Navigation() {
 
   const toggleVisible = () => {
     setToggle(!toggle);
+    if (!toggle) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
   };
 
   const handleClick = () => {
     setCartModal(!cartModal);
+    if (!cartModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
   };
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "visible";
+    };
+  }, []);
 
   return (
     <div>

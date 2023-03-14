@@ -3,81 +3,90 @@ import styled from "styled-components";
 
 function Category() {
   return (
-    <CategoryContainer>
-      <CategoryDiv>
-        <CategoryPictures>
-          <Image
-            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/shared/image-category-thumbnail-headphones.png`}
-          />
-        </CategoryPictures>
-
-        <TitleAndShopContainer>
-          <p>HEADPHONES</p>
-          <ShopContainer>
-            <Link to="/products/headphones">
-              <p>SHOP</p>
-            </Link>
-
-            <img
-              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
+    <Modal>
+      <CategoryContainer>
+        <CategoryDiv>
+          <CategoryPictures>
+            <Image
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/shared/image-category-thumbnail-headphones.png`}
             />
-          </ShopContainer>
-        </TitleAndShopContainer>
-      </CategoryDiv>
+          </CategoryPictures>
 
-      <CategoryDiv>
-        <div>
-          <Image
-            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/shared/image-category-thumbnail-speakers.png`}
-          />
-        </div>
+          <TitleAndShopContainer>
+            <p>HEADPHONES</p>
+            <ShopContainer>
+              <Link to="/products/headphones">
+                <p>SHOP</p>
+              </Link>
 
-        <TitleAndShopContainer>
-          <p>SPEAKERS</p>
-          <ShopContainer>
-            <Link to="/products/speakers">
-              <p>SHOP</p>
-            </Link>
-            <img
-              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
+              <img
+                src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
+              />
+            </ShopContainer>
+          </TitleAndShopContainer>
+        </CategoryDiv>
+
+        <CategoryDiv>
+          <div>
+            <Image
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/shared/image-category-thumbnail-speakers.png`}
             />
-          </ShopContainer>
-        </TitleAndShopContainer>
-      </CategoryDiv>
+          </div>
 
-      <CategoryDiv>
-        <div>
-          <Image
-            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/shared/image-category-thumbnail-earphones.png`}
-          />
-        </div>
+          <TitleAndShopContainer>
+            <p>SPEAKERS</p>
+            <ShopContainer>
+              <Link to="/products/speakers">
+                <p>SHOP</p>
+              </Link>
+              <img
+                src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
+              />
+            </ShopContainer>
+          </TitleAndShopContainer>
+        </CategoryDiv>
 
-        <TitleAndShopContainer>
-          <p>EARPHONES</p>
-          <ShopContainer>
-            <Link to="/products/earphones">
-              <p>SHOP</p>
-            </Link>
-            <img
-              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
+        <CategoryDiv>
+          <div>
+            <Image
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/shared/image-category-thumbnail-earphones.png`}
             />
-          </ShopContainer>
-        </TitleAndShopContainer>
-      </CategoryDiv>
-    </CategoryContainer>
+          </div>
+
+          <TitleAndShopContainer>
+            <p>EARPHONES</p>
+            <ShopContainer>
+              <Link to="/products/earphones">
+                <p>SHOP</p>
+              </Link>
+              <img
+                src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
+              />
+            </ShopContainer>
+          </TitleAndShopContainer>
+        </CategoryDiv>
+      </CategoryContainer>
+    </Modal>
   );
 }
 
 export default Category;
 
+const Modal = styled.div`
+  left: 0;
+  top: 105px;
+  width: 100%;
+  background-color: white;
+`;
 const CategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 68px;
   width: 87%;
   margin: auto;
-  margin-top: 92px;
+  margin-top: 84px;
   padding-bottom: 35px;
+  background-color: white;
 `;
 
 const CategoryDiv = styled.div`
