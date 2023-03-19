@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Cart from "./Cart";
 import Category from "./Category";
 import { NavigationContainer } from "./styles";
-function Navigation() {
+function Navigation({ user, token }: any) {
   const [toggle, setToggle] = useState(false);
   const [cartModal, setCartModal] = useState(false);
 
@@ -54,7 +54,7 @@ function Navigation() {
       </NavigationContainer>
 
       {toggle && <Category />}
-      {cartModal && <Cart />}
+      {cartModal && <Cart user={user} token={token} />}
     </div>
   );
 }

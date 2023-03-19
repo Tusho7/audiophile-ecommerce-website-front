@@ -9,6 +9,7 @@ import { ProductType, User } from "./Components/types";
 import Product from "./Components/Product";
 import Detail from "./Components/Detail";
 import Cart from "./Components/Cart";
+import { config } from "process";
 
 function App() {
   const navigate = useNavigate();
@@ -86,9 +87,9 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        {isLogin ? (
+        {user ? (
           <>
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home user={user} token={token} />} />
             <Route path="/category" element={<Category />} />
             <Route
               path="/products/:category"
@@ -112,7 +113,6 @@ function App() {
                 <Detail data={data} category={""} cart={[]} setCart={setCart} />
               }
             />
-            <Route path="/cart" element={<Cart user={user} />} />
           </>
         ) : (
           <>

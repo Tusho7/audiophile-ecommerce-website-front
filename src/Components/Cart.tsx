@@ -2,13 +2,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { CartType } from "./types";
+import { CartType, User } from "./types";
+import mongoose, { Types } from "mongoose";
 
-function Cart({ user }: any) {
+function Cart({ user, token }: any) {
   const navigate = useNavigate();
   const [cart, setCart] = useState<CartType[]>([]);
-  const result = cart.filter((item: CartType) => item.userId === user?.id);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  console.log("user", user);
+  console.log("cart", cart);
+  console.log("token", token);
 
   useEffect(() => {
     const getCarts = async () => {
@@ -19,19 +22,23 @@ function Cart({ user }: any) {
       setIsLoading(false);
     };
     getCarts();
-  }, [user, cart]);
+  }, []);
+  const result = cart.filter((item: CartType) => item.userId === user?.id);
 
-  const removeFunction = async (id: string | undefined) => {
-    console.log(id);
+  const removeAllCarts = async () => {
     try {
-      const res = await axios.delete(
-        `https://audiophile-ecommerce-tunt.onrender.com/api/carts/${id}`
+      const response = await axios.delete(
+        `https://curious-pear-anemone.cyclic.app/api/deleteCarts`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      console.log(res.data);
-      console.log("Cart deleted");
+      console.log(response.data);
+      setCart([]);
     } catch (error) {
-      console.error(error);
-      console.log("Error deleting cart");
+      console.log(error);
     }
   };
 
@@ -55,7 +62,7 @@ function Cart({ user }: any) {
             <H1>CART</H1>
             {isLoading && result.length === 0 && <p>Cart is empty</p>}
             {cart.length !== 0 && (
-              <RemoveButton onClick={() => removeFunction(user?._id)}>
+              <RemoveButton onClick={() => removeAllCarts()}>
                 Remove all
               </RemoveButton>
             )}

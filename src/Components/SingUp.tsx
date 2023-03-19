@@ -2,9 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import "../index.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function SignUp({ setUser }: any) {
+function SignUp({ setUser, user }: any) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState<File | null>(null);
@@ -53,6 +54,7 @@ function SignUp({ setUser }: any) {
         formData
       );
       console.log(response.data);
+      navigate("/home");
       setUser(response.data);
     } catch (error) {
       console.error(error);
@@ -76,6 +78,8 @@ function SignUp({ setUser }: any) {
       setAvatarError("");
     }
   };
+
+  console.log(user);
 
   return (
     <SignUpContainer>
@@ -112,7 +116,7 @@ function SignUp({ setUser }: any) {
         </form>
         <LoginDiv>
           <p>Already have an account?</p>
-          <LoginLink to="/login" className="login-butt">
+          <LoginLink to="/" className="login-butt">
             Login
           </LoginLink>
         </LoginDiv>

@@ -73,10 +73,11 @@ export type AlsoProps = {
 };
 
 export interface User {
-  avatar: "";
-  email: "";
-  iat: 0;
-  id: "";
+  exp: number;
+  iat: number;
+  id: string;
+  image: string;
+  name: string;
 }
 
 export interface LogIn {

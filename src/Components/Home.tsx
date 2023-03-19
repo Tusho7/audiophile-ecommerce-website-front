@@ -29,11 +29,12 @@ import {
   SecondContainer,
   Yx1Text,
 } from "./styles";
+import { User } from "./types";
 
-function Home() {
+function Home({ user, token }: any) {
   return (
     <div>
-      <Navigation />
+      <Navigation user={user} token={token} />
 
       <Line />
 
