@@ -60,7 +60,6 @@ function App() {
         }
       );
       const { token } = response.data;
-      console.log("token:", token);
       if (!token) {
         throw new Error("No token received from the server");
       }
@@ -98,19 +97,37 @@ function App() {
             <Route
               path="/products/:slug/detail"
               element={
-                <Detail data={data} category={""} cart={[]} setCart={setCart} />
+                <Detail
+                  data={data}
+                  category={""}
+                  cart={[]}
+                  setCart={setCart}
+                  user={user}
+                />
               }
             />
             <Route
               path="/products/:slug/detail"
               element={
-                <Detail data={data} category={""} cart={[]} setCart={setCart} />
+                <Detail
+                  data={data}
+                  category={""}
+                  cart={[]}
+                  setCart={setCart}
+                  user={user}
+                />
               }
             />
             <Route
               path="/products/:slug/detail"
               element={
-                <Detail data={data} category={""} cart={[]} setCart={setCart} />
+                <Detail
+                  data={data}
+                  category={""}
+                  cart={[]}
+                  setCart={setCart}
+                  user={user}
+                />
               }
             />
           </>

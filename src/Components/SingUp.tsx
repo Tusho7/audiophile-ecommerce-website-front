@@ -53,7 +53,6 @@ function SignUp({ setUser, user }: any) {
         "https://audiophile-ecommerce-tunt.onrender.com/api/auth/signup",
         formData
       );
-      console.log(response.data);
       navigate("/home");
       setUser(response.data);
     } catch (error) {
@@ -78,8 +77,6 @@ function SignUp({ setUser, user }: any) {
       setAvatarError("");
     }
   };
-
-  console.log(user);
 
   return (
     <SignUpContainer>

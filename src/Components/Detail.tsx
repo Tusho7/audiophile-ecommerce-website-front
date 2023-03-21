@@ -12,7 +12,8 @@ function Detail({
   data,
   cart,
   setCart,
-}: ProductProps & { cart: ProductType[]; setCart: Function }) {
+  user,
+}: ProductProps & { cart: ProductType[]; setCart: Function; user: any }) {
   const { slug } = useParams<{ slug: string }>();
   const result = data.find((item: ProductType) => item.slug === slug);
   const [quantity, setQuantity] = useState(1);
@@ -44,7 +45,7 @@ function Detail({
       number,
       price: result.price,
       image: result.image.mobile,
-      userId: result.id,
+      userId: user.id,
     };
     try {
       const res = await axios.post(

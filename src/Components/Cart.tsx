@@ -9,36 +9,42 @@ function Cart({ user, token }: any) {
   const navigate = useNavigate();
   const [cart, setCart] = useState<CartType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  console.log("user", user);
-  console.log("cart", cart);
-  console.log("token", token);
 
   useEffect(() => {
-    const getCarts = async () => {
-      const res = await axios.get(
-        "https://curious-pear-anemone.cyclic.app/api/carts"
-      );
-      setCart(res.data);
-      setIsLoading(false);
+    const getCarts = async (id: string) => {
+      try {
+        const res = await axios.get(
+          `https://curious-pear-anemone.cyclic.app/api/carts/${id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setCart(res.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
     };
-    getCarts();
-  }, []);
+
+    if (user && user.id) {
+      getCarts(user.id);
+    }
+  }, [user, token]);
+
   const result = cart.filter((item: CartType) => item.userId === user?.id);
 
-  const removeAllCarts = async () => {
+  const removeAllCarts = async (id: string) => {
     try {
       const response = await axios.delete(
-        `https://curious-pear-anemone.cyclic.app/api/deleteCarts`,
+        `https://curious-pear-anemone.cyclic.app/api/deleteCarts/${id}`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log(response.data);
       setCart([]);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -62,7 +68,7 @@ function Cart({ user, token }: any) {
             <H1>CART</H1>
             {isLoading && result.length === 0 && <p>Cart is empty</p>}
             {cart.length !== 0 && (
-              <RemoveButton onClick={() => removeAllCarts()}>
+              <RemoveButton onClick={() => removeAllCarts(user?.id)}>
                 Remove all
               </RemoveButton>
             )}
