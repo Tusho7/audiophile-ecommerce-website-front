@@ -8,12 +8,7 @@ import Navigation from "./Navigation";
 import { ProductProps, ProductType } from "./types";
 import YouMayLike from "./YouMayLike";
 
-function Detail({
-  data,
-  cart,
-  setCart,
-  user,
-}: ProductProps & { cart: ProductType[]; setCart: Function; user: any }) {
+function Detail({ data, user }: ProductProps & { user: any }) {
   const { slug } = useParams<{ slug: string }>();
   const result = data.find((item: ProductType) => item.slug === slug);
   const [quantity, setQuantity] = useState(1);

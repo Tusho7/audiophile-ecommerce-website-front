@@ -10,6 +10,7 @@ import Product from "./Components/Product";
 import Detail from "./Components/Detail";
 import Cart from "./Components/Cart";
 import { config } from "process";
+import Checkout from "./Components/Checkout";
 
 function App() {
   const navigate = useNavigate();
@@ -20,7 +21,6 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [cart, setCart] = useState("");
 
   useEffect(() => {
     const getProducts = async () => {
@@ -96,40 +96,17 @@ function App() {
             />
             <Route
               path="/products/:slug/detail"
-              element={
-                <Detail
-                  data={data}
-                  category={""}
-                  cart={[]}
-                  setCart={setCart}
-                  user={user}
-                />
-              }
+              element={<Detail data={data} category={""} user={user} />}
             />
             <Route
               path="/products/:slug/detail"
-              element={
-                <Detail
-                  data={data}
-                  category={""}
-                  cart={[]}
-                  setCart={setCart}
-                  user={user}
-                />
-              }
+              element={<Detail data={data} category={""} user={user} />}
             />
             <Route
               path="/products/:slug/detail"
-              element={
-                <Detail
-                  data={data}
-                  category={""}
-                  cart={[]}
-                  setCart={setCart}
-                  user={user}
-                />
-              }
+              element={<Detail data={data} category={""} user={user} />}
             />
+            <Route path="/checkout" element={<Checkout />} />
           </>
         ) : (
           <>
@@ -149,6 +126,7 @@ function App() {
               path="/signup"
               element={<SignUp user={user} setUser={setUser} />}
             />
+            <Route path="/checkout" element={<Checkout />} />
           </>
         )}
       </Routes>

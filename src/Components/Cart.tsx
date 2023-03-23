@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartType, User } from "./types";
-import mongoose, { Types } from "mongoose";
 
 function Cart({ user, token }: any) {
   const navigate = useNavigate();
@@ -31,7 +30,6 @@ function Cart({ user, token }: any) {
       getCarts(user.id);
     }
   }, [user, token]);
-
   const result = cart.filter((item: CartType) => item.userId === user?.id);
 
   const removeAllCarts = async (id: string) => {
@@ -59,7 +57,6 @@ function Cart({ user, token }: any) {
       currency: "USD",
     })
     .replace(/\.00$/, "");
-
   return (
     <Modal>
       <CartContainer>
