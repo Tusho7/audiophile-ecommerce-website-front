@@ -10,7 +10,7 @@ function Checkout() {
       <p>Go Back</p>
 
       <CheckoutContainer>
-        <p>CHECKOUT</p>
+        <MainTitle>CHECKOUT</MainTitle>
         <DetailsText>BILLING DETAILS</DetailsText>
         <InputContainer>
           <label>Name</label>
@@ -42,7 +42,7 @@ function Checkout() {
           <input placeholder="United States" />
         </InputContainer>
         <DetailsText>PAYMENT DETAILS</DetailsText>
-        <p>Payment Method</p>
+        <PaymentMethodText>Payment Method</PaymentMethodText>
         <RadioInputsContainer>
           <label>
             <input type="radio" name="radio-input" value="e-Money" />
@@ -121,7 +121,20 @@ const CheckoutContainer = styled.div`
     background: #ffffff;
     border: 1px solid #cfcfcf;
     border-radius: 8px;
+    padding-top: 18px;
+    padding-bottom: 19px;
+    padding-left: 24px;
   }
+`;
+
+const MainTitle = styled.p`
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 38px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  color: #000000;
 `;
 
 const DetailsText = styled.p`
@@ -133,11 +146,30 @@ const DetailsText = styled.p`
   color: #d87d4a;
 `;
 
+const PaymentMethodText = styled.p`
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.214286px;
+  color: #000000;
+  padding-top: 16px;
+  padding-bottom: 16px;
+`;
+
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin: auto;
+  padding-bottom: 24px;
+  label {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.214286px;
+
+    color: #000000;
+  }
 `;
 
 export const FooterContainer = styled.div`
@@ -186,9 +218,14 @@ const RadioInputsContainer = styled.div`
   flex-direction: column;
   margin: auto;
   label {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-left: 24px;
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    padding-bottom: 32px;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
   }
   input {
     width: 20px;
