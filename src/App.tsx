@@ -106,7 +106,7 @@ function App() {
               path="/products/:slug/detail"
               element={<Detail data={data} category={""} user={user} />}
             />
-            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/checkout" element={<Checkout data={data} />} />
           </>
         ) : (
           <>
@@ -126,7 +126,6 @@ function App() {
               path="/signup"
               element={<SignUp user={user} setUser={setUser} />}
             />
-            <Route path="/checkout" element={<Checkout />} />
           </>
         )}
       </Routes>

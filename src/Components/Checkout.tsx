@@ -2,12 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import BestGear from "./BestGear";
 import Navigation from "./Navigation";
+import { Link, useParams } from "react-router-dom";
+import Cart from "./Cart";
+import { ProductProps, ProductType } from "./types";
 
-function Checkout() {
+function Checkout({ data }: ProductProps) {
   return (
     <MainContainer>
       <Navigation />
-      <p>Go Back</p>
+      <Link to="/home">
+        <GoBack>Go Back</GoBack>
+      </Link>
 
       <CheckoutContainer>
         <MainTitle>CHECKOUT</MainTitle>
@@ -106,6 +111,17 @@ export default Checkout;
 
 const MainContainer = styled.div`
   background-color: #f2f2f2;
+`;
+
+const GoBack = styled.p`
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 25px;
+  color: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  padding-top: 16px;
+  padding-left: 24px;
 `;
 
 const CheckoutContainer = styled.div`

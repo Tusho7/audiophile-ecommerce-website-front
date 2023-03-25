@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartType, User } from "./types";
@@ -57,6 +57,11 @@ function Cart({ user, token }: any) {
       currency: "USD",
     })
     .replace(/\.00$/, "");
+
+  const handleCheckoutClick = () => {
+    navigate("/checkout");
+  };
+
   return (
     <Modal>
       <CartContainer>
@@ -103,7 +108,7 @@ function Cart({ user, token }: any) {
           <p>{formattedTotal}</p>
         </TotalContainer>
 
-        <CheckoutButton>CHECKOUT</CheckoutButton>
+        <CheckoutButton onClick={handleCheckoutClick}>CHECKOUT</CheckoutButton>
       </CartContainer>
     </Modal>
   );
