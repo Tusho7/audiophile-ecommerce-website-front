@@ -4,9 +4,56 @@ import BestGear from "./BestGear";
 import Navigation from "./Navigation";
 import { Link, useParams } from "react-router-dom";
 import Cart from "./Cart";
-import { ProductProps, ProductType } from "./types";
+import { CartType, ProductProps, ProductType } from "./types";
+import { useLocation } from "react-router-dom";
 
 function Checkout({ data }: ProductProps) {
+  const location = useLocation();
+  const { result, formattedTotal } = location.state;
+
+  const numProducts = result.length;
+
+  let shippingCost = 0;
+
+  const shipping = () => {
+    if (numProducts === 1) {
+      shippingCost = 15;
+    } else if (numProducts === 2) {
+      shippingCost = 25;
+    } else if (numProducts === 3) {
+      shippingCost = 35;
+    } else if (numProducts === 4) {
+      shippingCost = 45;
+    } else if (numProducts === 5) {
+      shippingCost = 55;
+    } else if (numProducts === 6) {
+      shippingCost = 65;
+    } else if (numProducts === 7) {
+      shippingCost = 75;
+    } else if (numProducts === 8) {
+      shippingCost = 85;
+    } else if (numProducts === 9) {
+      shippingCost = 95;
+    } else if (numProducts === 10) {
+      shippingCost = 105;
+    } else if (numProducts === 11) {
+      shippingCost = 115;
+    } else if (numProducts === 12) {
+      shippingCost = 125;
+    } else if (numProducts === 13) {
+      shippingCost = 135;
+    } else if (numProducts === 14) {
+      shippingCost = 145;
+    } else if (numProducts === 15) {
+      shippingCost = 155;
+    }
+  };
+
+  shipping();
+
+  const GrandTotalPrice = shippingCost + parseFloat(formattedTotal.slice(1));
+  console.log(GrandTotalPrice);
+
   return (
     <MainContainer>
       <Navigation />
@@ -68,9 +115,49 @@ function Checkout({ data }: ProductProps) {
           <input placeholder="6891" />
         </InputContainer>
       </CheckoutContainer>
-      <div>
-        <p>SUMMARY</p>
-      </div>
+      <SummaryContainerGlobal>
+        <SummaryTitle>SUMMARY</SummaryTitle>
+
+        {result.map((item: any) => (
+          <SummaryMainContainer>
+            <Img
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${item.image}`}
+            />
+
+            <NamePriceAndNumberContainer>
+              <div>
+                <p>
+                  {item.name
+                    .replace(/Headphones|Speakers|Earphones/gi, "")
+                    .replace(/\bMark\b/gi, "MK")
+                    .trim()}
+                </p>
+                <p>{`$ ${parseFloat(item.price) * item.number}
+`}</p>
+              </div>
+
+              <p>{"x" + item.number}</p>
+            </NamePriceAndNumberContainer>
+          </SummaryMainContainer>
+        ))}
+
+        <div>
+          <p>TOTAL</p>
+          <p>{formattedTotal}</p>
+        </div>
+
+        <div>
+          <p>SHIPPING</p>
+          <p>{"$ " + shippingCost}</p>
+        </div>
+
+        <div>
+          <p>GRAND TOTAL</p>
+          <p>{"$ " + GrandTotalPrice}</p>
+        </div>
+
+        <SummaryButton>CONTINUE & PAY</SummaryButton>
+      </SummaryContainerGlobal>
       <FooterContainer>
         <img
           src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/logo.svg`}
@@ -143,6 +230,58 @@ const CheckoutContainer = styled.div`
   }
 `;
 
+const SummaryContainerGlobal = styled.div`
+  width: 87%;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-top: 32px;
+  padding: 24px 24px 32px 24px;
+`;
+
+const SummaryTitle = styled.p`
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: 1.28571px;
+  text-transform: uppercase;
+  color: #000000;
+  padding-bottom: 31px;
+`;
+
+const SummaryMainContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+
+const SummaryButton = styled.button`
+  width: 100%;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding: 15px 53px 15px 58px;
+  background: #d87d4a;
+  border: none;
+  margin-top: 32px;
+`;
+
+const Img = styled.img`
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+`;
+
+const NamePriceAndNumberContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 109px;
+`;
+
 const MainTitle = styled.p`
   font-weight: 700;
   font-size: 28px;
@@ -160,6 +299,7 @@ const DetailsText = styled.p`
   letter-spacing: 0.928571px;
   text-transform: uppercase;
   color: #d87d4a;
+  padding-bottom: 16px;
 `;
 
 const PaymentMethodText = styled.p`
@@ -243,9 +383,27 @@ const RadioInputsContainer = styled.div`
     border: 1px solid #cfcfcf;
     border-radius: 8px;
   }
-  input {
+  label:first-child {
+    margin-bottom: 16px;
+  }
+  label:nth-child(2) {
+    margin-bottom: 32px;
+  }
+  input[type="radio"] {
     width: 20px;
     height: 20px;
     margin-right: 16px;
+    position: relative;
+    &:checked::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #d87d4a;
+    }
   }
 `;

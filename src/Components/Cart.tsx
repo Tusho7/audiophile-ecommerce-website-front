@@ -59,7 +59,11 @@ function Cart({ user, token }: any) {
     .replace(/\.00$/, "");
 
   const handleCheckoutClick = () => {
-    navigate("/checkout");
+    if (cart.length === 0) {
+      alert("Your cart is empty!");
+    } else {
+      navigate("/checkout", { state: { result, formattedTotal } });
+    }
   };
 
   return (
