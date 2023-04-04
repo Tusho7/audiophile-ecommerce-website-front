@@ -73,11 +73,8 @@ function Checkout() {
       newShippingCost = 155;
     }
 
-    console.log("Shipping cost:", shippingCost);
-    console.log("Formatted total:", formattedTotal);
     const formattedTotalNum = parseFloat(formattedTotal.replace(/[$,]/g, ""));
     const grandTotalPrice = shippingCost + formattedTotalNum;
-    console.log("grand", grandTotalPrice);
     setShippingCost(newShippingCost);
     setGrandTotalPrice(grandTotalPrice);
   }, [result, formattedTotal]);
