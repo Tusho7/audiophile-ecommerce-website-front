@@ -1,196 +1,489 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import BestGear from "./BestGear";
 import Navigation from "./Navigation";
-import { Link, useParams } from "react-router-dom";
-import Cart from "./Cart";
-import { CartType, ProductProps, ProductType } from "./types";
+import { Form, Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-function Checkout({ data }: ProductProps) {
+interface MainContainerProps {
+  isModalOpen: boolean;
+}
+
+function Checkout() {
+  const navigate = useNavigate();
   const location = useLocation();
   const { result, formattedTotal } = location.state;
 
-  const numProducts = result.length;
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressError, setAddressError] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [zipCodeError, setZipCodeError] = useState("");
+  const [city, setCity] = useState("");
+  const [cityError, setCityError] = useState("");
+  const [country, setCountry] = useState("");
+  const [countryError, setCountryError] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [paymentMethodError, setPaymentMethodError] = useState("");
+  const [emoneyNumber, setEmoneyNumber] = useState("");
+  const [emoneyNumberError, setEmoneyNumberError] = useState("");
+  const [emoneyPIN, setEmoneyPIN] = useState("");
+  const [emoneyPINError, setEmoneyPINError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [grandTotalPrice, setGrandTotalPrice] = useState(0);
+  const [shippingCost, setShippingCost] = useState(0);
 
-  let shippingCost = 0;
+  useEffect(() => {
+    const numProducts = result.length;
+    let newShippingCost = 0;
 
-  const shipping = () => {
     if (numProducts === 1) {
-      shippingCost = 15;
+      newShippingCost = 15;
     } else if (numProducts === 2) {
-      shippingCost = 25;
+      newShippingCost = 25;
     } else if (numProducts === 3) {
-      shippingCost = 35;
+      newShippingCost = 35;
     } else if (numProducts === 4) {
-      shippingCost = 45;
+      newShippingCost = 45;
     } else if (numProducts === 5) {
-      shippingCost = 55;
+      newShippingCost = 55;
     } else if (numProducts === 6) {
-      shippingCost = 65;
+      newShippingCost = 65;
     } else if (numProducts === 7) {
-      shippingCost = 75;
+      newShippingCost = 75;
     } else if (numProducts === 8) {
-      shippingCost = 85;
+      newShippingCost = 85;
     } else if (numProducts === 9) {
-      shippingCost = 95;
+      newShippingCost = 95;
     } else if (numProducts === 10) {
-      shippingCost = 105;
+      newShippingCost = 105;
     } else if (numProducts === 11) {
-      shippingCost = 115;
+      newShippingCost = 115;
     } else if (numProducts === 12) {
-      shippingCost = 125;
+      newShippingCost = 125;
     } else if (numProducts === 13) {
-      shippingCost = 135;
+      newShippingCost = 135;
     } else if (numProducts === 14) {
-      shippingCost = 145;
+      newShippingCost = 145;
     } else if (numProducts === 15) {
-      shippingCost = 155;
+      newShippingCost = 155;
+    }
+
+    console.log("Shipping cost:", shippingCost);
+    console.log("Formatted total:", formattedTotal);
+    const formattedTotalNum = parseFloat(formattedTotal.replace(/[$,]/g, ""));
+    const grandTotalPrice = shippingCost + formattedTotalNum;
+    console.log("grand", grandTotalPrice);
+    setShippingCost(newShippingCost);
+    setGrandTotalPrice(grandTotalPrice);
+  }, [result, formattedTotal]);
+
+  const validateName = () => {
+    if (!name) {
+      setNameError("Name is required");
+      return false;
+    }
+    setNameError("");
+    return true;
+  };
+
+  const validateEmail = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setEmailError("Email is required");
+      return false;
+    } else if (!emailRegex.test(email)) {
+      setEmailError("Invalid email address");
+      return false;
+    }
+    setEmailError("");
+    return true;
+  };
+
+  const validatePhone = () => {
+    const phoneRegex = /^\d{9}$/;
+    if (!phone) {
+      setPhoneError("Phone number is required");
+      return false;
+    } else if (!phoneRegex.test(phone)) {
+      setPhoneError("Invalid phone number");
+      return false;
+    }
+    setPhoneError("");
+    return true;
+  };
+
+  const validateAddress = () => {
+    if (!address) {
+      setAddressError("Address is required");
+      return false;
+    }
+    setAddressError("");
+    return true;
+  };
+
+  const validateZipCode = () => {
+    const zipCodeRegex = /^\d{5}$/;
+    if (!zipCode) {
+      setZipCodeError("Zip code is required");
+      return false;
+    } else if (!zipCodeRegex.test(zipCode)) {
+      setZipCodeError("Invalid zip code");
+      return false;
+    }
+    setZipCodeError("");
+    return true;
+  };
+
+  const validateCity = () => {
+    if (!city) {
+      setCityError("City is required");
+      return false;
+    }
+    setCityError("");
+    return true;
+  };
+
+  const validateCountry = () => {
+    if (!country) {
+      setCountryError("Country is required");
+      return false;
+    }
+    setCountryError("");
+    return true;
+  };
+
+  const validatePaymentMethod = () => {
+    if (!paymentMethod) {
+      setPaymentMethodError("Payment method is required");
+      return false;
+    }
+    setPaymentMethodError("");
+    return true;
+  };
+
+  const validateEmoneyNumber = () => {
+    if (paymentMethod === "e-Money" && !emoneyNumber) {
+      setEmoneyNumberError("e-Money number is required");
+      return false;
+    }
+    setEmoneyNumberError("");
+    return true;
+  };
+
+  const validateEmoneyPIN = () => {
+    const emoneyPINRegex = /^\d{4}$/;
+    if (paymentMethod === "e-Money" && !emoneyPIN) {
+      setEmoneyPINError("e-Money PIN is required");
+      return false;
+    } else if (paymentMethod === "e-Money" && !emoneyPINRegex.test(emoneyPIN)) {
+      setEmoneyPINError("Invalid e-Money PIN");
+      return false;
+    }
+    setEmoneyPINError("");
+    return true;
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    document.body.style.overflow = "hidden";
+    window.scrollTo(0, 60);
+  };
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    const isNameValid = validateName();
+    const isEmailValid = validateEmail();
+    const isPhoneValid = validatePhone();
+    const isAddressValid = validateAddress();
+    const isZipCodeValid = validateZipCode();
+    const isCityValid = validateCity();
+    const isCountryValid = validateCountry();
+    const isPaymentMethodValid = validatePaymentMethod();
+    const isEmoneyNumberValid = validateEmoneyNumber();
+    const isEmoneyPINValid = validateEmoneyPIN();
+
+    if (
+      isNameValid &&
+      isEmailValid &&
+      isPhoneValid &&
+      isAddressValid &&
+      isZipCodeValid &&
+      isCityValid &&
+      isCountryValid &&
+      isPaymentMethodValid &&
+      isEmoneyNumberValid &&
+      isEmoneyPINValid
+    ) {
+      handleOpenModal();
     }
   };
 
-  shipping();
+  const modalClick = () => {
+    navigate("/home");
+  };
 
-  const GrandTotalPrice = shippingCost + parseFloat(formattedTotal.slice(1));
-  console.log(GrandTotalPrice);
+  useEffect(() => {
+    const body = document.querySelector("body")!;
+    if (isModalOpen) {
+      body.classList.add("modal-open");
+    } else {
+      body.classList.remove("modal-open");
+    }
+  }, [isModalOpen]);
 
   return (
-    <MainContainer>
-      <Navigation />
-      <Link to="/home">
-        <GoBack>Go Back</GoBack>
-      </Link>
+    <>
+      <MainContainer>
+        <Navigation />
+        <Link to="/home">
+          <GoBack>Go Back</GoBack>
+        </Link>
 
-      <CheckoutContainer>
-        <MainTitle>CHECKOUT</MainTitle>
-        <DetailsText>BILLING DETAILS</DetailsText>
-        <InputContainer>
-          <label>Name</label>
-          <input placeholder="Alexei Ward" />
-        </InputContainer>
-        <InputContainer>
-          <label>Email Address</label>
-          <input placeholder="alexei@mail.com" />
-        </InputContainer>
-        <InputContainer>
-          <label>Phone Number</label>
-          <input placeholder="+1 202-555-0136" />
-        </InputContainer>
-        <DetailsText>SHIPPING INFO</DetailsText>
-        <InputContainer>
-          <label>Your Address</label>
-          <input placeholder="1137 Williams Avenue" />
-        </InputContainer>
-        <InputContainer>
-          <label>ZIP Code</label>
-          <input placeholder="10001" />
-        </InputContainer>
-        <InputContainer>
-          <label>City</label>
-          <input placeholder="New York" />
-        </InputContainer>
-        <InputContainer>
-          <label>Country</label>
-          <input placeholder="United States" />
-        </InputContainer>
-        <DetailsText>PAYMENT DETAILS</DetailsText>
-        <PaymentMethodText>Payment Method</PaymentMethodText>
-        <RadioInputsContainer>
-          <label>
-            <input type="radio" name="radio-input" value="e-Money" />
-            e-Money
-          </label>
-          <label>
-            <input type="radio" name="radio-input" value="Cash on Delivery" />
-            Cash on Delivery
-          </label>
-        </RadioInputsContainer>
+        <Foorm isModalOpen={isModalOpen}>
+          <CheckoutContainer>
+            <MainTitle>CHECKOUT</MainTitle>
+            <DetailsText>BILLING DETAILS</DetailsText>
+            <InputContainer>
+              <label>Name</label>
+              <input
+                placeholder="Alexei Ward"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              {nameError && <ErrorText>{nameError}</ErrorText>}
+            </InputContainer>
+            <InputContainer>
+              <label>Email Address</label>
+              <input
+                placeholder="alexei@mail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {emailError && <ErrorText>{emailError}</ErrorText>}
+            </InputContainer>
+            <InputContainer>
+              <label>Phone Number</label>
+              <input
+                placeholder="599 99 99 99"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              {phoneError && <ErrorText>{phoneError}</ErrorText>}
+            </InputContainer>
+            <DetailsText>SHIPPING INFO</DetailsText>
+            <InputContainer>
+              <label>Your Address</label>
+              <input
+                placeholder="1137 Williams Avenue"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              {addressError && <ErrorText>{addressError}</ErrorText>}
+            </InputContainer>
+            <InputContainer>
+              <label>ZIP Code</label>
+              <input
+                placeholder="10001"
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
+              />
+              {zipCodeError && <ErrorText>{zipCodeError}</ErrorText>}
+            </InputContainer>
+            <InputContainer>
+              <label>City</label>
+              <input
+                placeholder="New York"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+              {cityError && <ErrorText>{cityError}</ErrorText>}
+            </InputContainer>
+            <InputContainer>
+              <label>Country</label>
+              <input
+                placeholder="United States"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+              {countryError && <ErrorText>{countryError}</ErrorText>}
+            </InputContainer>
+            <DetailsText>PAYMENT DETAILS</DetailsText>
+            <PaymentMethodText>Payment Method</PaymentMethodText>
+            <RadioInputsContainer>
+              <label>
+                <input
+                  type="radio"
+                  name="radio-input"
+                  value="e-Money"
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                e-Money
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="radio-input"
+                  value="Cash on Delivery"
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                Cash on Delivery
+              </label>
+            </RadioInputsContainer>
+            {paymentMethod === "e-Money" && (
+              <>
+                <InputContainer>
+                  <label>e-Money Number</label>
+                  <input
+                    placeholder="238521993"
+                    value={emoneyNumber}
+                    onChange={(e) => setEmoneyNumber(e.target.value)}
+                  />
+                  {emoneyNumberError && (
+                    <ErrorText>{emoneyNumberError}</ErrorText>
+                  )}
+                </InputContainer>
+                <InputContainer>
+                  <label>e-Money-PIN</label>
+                  <input
+                    placeholder="6891"
+                    value={emoneyPIN}
+                    onChange={(e) => setEmoneyPIN(e.target.value)}
+                  />
+                  {emoneyPINError && <ErrorText>{emoneyPINError}</ErrorText>}
+                </InputContainer>
+              </>
+            )}
+          </CheckoutContainer>
+          <SummaryContainerGlobal>
+            <SummaryTitle>SUMMARY</SummaryTitle>
 
-        <InputContainer>
-          <label>e-Money Number</label>
-          <input placeholder="238521993" />
-        </InputContainer>
-        <InputContainer>
-          <label>e-Money-PIN</label>
-          <input placeholder="6891" />
-        </InputContainer>
-      </CheckoutContainer>
-      <SummaryContainerGlobal>
-        <SummaryTitle>SUMMARY</SummaryTitle>
-
-        {result.map((item: any) => (
-          <SummaryMainContainer>
-            <Img
-              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${item.image}`}
-            />
-
-            <NamePriceAndNumberContainer>
-              <div>
-                <p>
-                  {item.name
-                    .replace(/Headphones|Speakers|Earphones/gi, "")
-                    .replace(/\bMark\b/gi, "MK")
-                    .trim()}
-                </p>
-                <p>{`$ ${parseFloat(item.price) * item.number}
+            {result.map((item: any) => (
+              <SummaryMainContainer key="">
+                S
+                <Img
+                  src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${item.image}`}
+                />
+                <NamePriceAndNumberContainer>
+                  <div>
+                    <p>
+                      {item.name
+                        .replace(/Headphones|Speakers|Earphones/gi, "")
+                        .replace(/\bMark\b/gi, "MK")
+                        .trim()}
+                    </p>
+                    <p>{`$ ${parseFloat(item.price) * item.number}
 `}</p>
-              </div>
+                  </div>
 
-              <p>{"x" + item.number}</p>
-            </NamePriceAndNumberContainer>
-          </SummaryMainContainer>
-        ))}
+                  <p>{"x" + item.number}</p>
+                </NamePriceAndNumberContainer>
+              </SummaryMainContainer>
+            ))}
 
-        <div>
-          <p>TOTAL</p>
-          <p>{formattedTotal}</p>
-        </div>
+            <FinalPriceContainer>
+              <TitleAndPriceContainer>
+                <h4>TOTAL</h4>
+                <p>{formattedTotal}</p>
+              </TitleAndPriceContainer>
 
-        <div>
-          <p>SHIPPING</p>
-          <p>{"$ " + shippingCost}</p>
-        </div>
+              <TitleAndPriceContainer>
+                <h4>SHIPPING</h4>
+                <p>{"$ " + shippingCost}</p>
+              </TitleAndPriceContainer>
 
-        <div>
-          <p>GRAND TOTAL</p>
-          <p>{"$ " + GrandTotalPrice}</p>
-        </div>
+              <TitleAndPriceContainer>
+                <h4>GRAND TOTAL</h4>
+                <GrandTotal>{"$ " + grandTotalPrice.toFixed(2)}</GrandTotal>
+              </TitleAndPriceContainer>
+            </FinalPriceContainer>
 
-        <SummaryButton>CONTINUE & PAY</SummaryButton>
-      </SummaryContainerGlobal>
-      <FooterContainer>
-        <img
-          src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/logo.svg`}
-        />
-        <FooterTexts>
-          <p>Home</p>
-          <p>HEADPHONES</p>
-          <p>SPEAKERS</p>
-          <p>EARPHONES</p>
-        </FooterTexts>
+            <SummaryButton onClick={handleSubmit}>CONTINUE & PAY</SummaryButton>
+          </SummaryContainerGlobal>
+          <FooterContainer>
+            <img
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/logo.svg`}
+            />
+            <FooterTexts>
+              <p>Home</p>
+              <p>HEADPHONES</p>
+              <p>SPEAKERS</p>
+              <p>EARPHONES</p>
+            </FooterTexts>
 
-        <Description>
-          Audiophile is an all in one stop to fulfill your audio needs. We're a
-          small team of music lovers and sound specialists who are devoted to
-          helping you get the most out of personal audio. Come and visit our
-          demo facility - we’re open 7 days a week.
-        </Description>
+            <Description>
+              Audiophile is an all in one stop to fulfill your audio needs.
+              We're a small team of music lovers and sound specialists who are
+              devoted to helping you get the most out of personal audio. Come
+              and visit our demo facility - we’re open 7 days a week.
+            </Description>
 
-        <Description>Copyright 2021. All Rights Reserved</Description>
+            <Description>Copyright 2021. All Rights Reserved</Description>
 
-        <FooterIcons>
-          <img
-            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-facebook.svg`}
-          />
-          <img
-            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-twitter.svg`}
-          />
-          <img
-            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-instagram.svg`}
-          />
-        </FooterIcons>
-      </FooterContainer>
-    </MainContainer>
+            <FooterIcons>
+              <img
+                src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-facebook.svg`}
+              />
+              <img
+                src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-twitter.svg`}
+              />
+              <img
+                src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-instagram.svg`}
+              />
+            </FooterIcons>
+          </FooterContainer>
+        </Foorm>
+
+        {isModalOpen && (
+          <ModalContainer>
+            <img src="https://audiophile-ecommerce-tunt.onrender.com/allImages/checkout/checkout.svg" />
+
+            <ModalTitle>THANK YOU FOR YOUR ORDER</ModalTitle>
+            <ModalText>
+              You will receive an email confirmation shortly.
+            </ModalText>
+
+            <div>
+              {result.map((item: any) => (
+                <ModalProductsContainer>
+                  <div>
+                    <ModalImg
+                      src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${item.image}`}
+                    />
+                  </div>
+
+                  <ProductsDescriptionMainContainer>
+                    <ProductsDescriptionContainer>
+                      <p>
+                        {item.name
+                          .replace(/Headphones|Speakers|Earphones/gi, "")
+                          .replace(/\bMark\b/gi, "MK")
+                          .trim()}
+                      </p>
+                      <p>{`$ ${parseFloat(item.price) * item.number}
+`}</p>
+                    </ProductsDescriptionContainer>
+
+                    <Xnumber>{"x" + item.number}</Xnumber>
+                  </ProductsDescriptionMainContainer>
+                </ModalProductsContainer>
+              ))}
+              <ModalBlackContainer>
+                <p>GRAND TOTAL</p>
+                <p>{"$ " + grandTotalPrice}</p>
+              </ModalBlackContainer>
+            </div>
+
+            <div>
+              <ModalButton onClick={modalClick}>BACK TO HOME</ModalButton>
+            </div>
+          </ModalContainer>
+        )}
+      </MainContainer>
+    </>
   );
 }
 
@@ -198,6 +491,24 @@ export default Checkout;
 
 const MainContainer = styled.div`
   background-color: #f2f2f2;
+`;
+
+const Foorm = styled.form<MainContainerProps>`
+  ${(props) =>
+    props.isModalOpen &&
+    `
+    &:after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    z-index: 2;
+  `}
 `;
 
 const GoBack = styled.p`
@@ -255,6 +566,47 @@ const SummaryMainContainer = styled.div`
   gap: 16px;
 `;
 
+const FinalPriceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 32px;
+  div:last-child {
+    margin-top: 16px;
+  }
+`;
+
+const TitleAndPriceContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h4 {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 25px;
+    color: #000000;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+  }
+  p {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: right;
+    text-transform: uppercase;
+    color: #000000;
+  }
+`;
+
+const GrandTotal = styled.h1`
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: right;
+  text-transform: uppercase;
+  color: #d87d4a;
+`;
+
 const SummaryButton = styled.button`
   width: 100%;
   font-weight: 700;
@@ -279,7 +631,24 @@ const Img = styled.img`
 const NamePriceAndNumberContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 109px;
+  width: 100%;
+  justify-content: space-between;
+  p:first-child {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 25px;
+    color: #000000;
+  }
+  p:last-child {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 25px;
+    color: #000000;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+  }
 `;
 
 const MainTitle = styled.p`
@@ -326,6 +695,15 @@ const InputContainer = styled.div`
 
     color: #000000;
   }
+`;
+
+const ErrorText = styled.p`
+  width: 100%;
+  padding-left: 20px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  color: red;
 `;
 
 export const FooterContainer = styled.div`
@@ -406,4 +784,136 @@ const RadioInputsContainer = styled.div`
       background-color: #d87d4a;
     }
   }
+`;
+
+const ModalContainer = styled.div`
+  width: 87%;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 32px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+`;
+
+const ModalTitle = styled.h1`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.857143px;
+  text-transform: uppercase;
+  color: #000000;
+  padding-top: 24px;
+`;
+
+const ModalText = styled.p`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 25px;
+  padding-top: 16px;
+  padding-bottom: 24px;
+  color: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+`;
+
+const ModalProductsContainer = styled.div`
+  width: 100%;
+  background: #f1f1f1;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 27px;
+  padding: 25px 24px 21px 35px;
+`;
+
+const ProductsDescriptionMainContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+
+const ProductsDescriptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  p:first-child {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 25px;
+    color: #000000;
+  }
+  p:last-child {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 25px;
+    color: #000000;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+  }
+`;
+
+const Xnumber = styled.p`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 25px;
+  text-align: right;
+  color: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+`;
+
+const ModalBlackContainer = styled.div`
+  background: #000000;
+  border-radius: 0px 0px 8px 8px;
+  color: #ffffff;
+  padding-top: 15px;
+  padding-left: 24px;
+  padding-bottom: 19px;
+  p:first-child {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 25px;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+  }
+  p:last-child {
+    padding-top: 8px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    text-transform: uppercase;
+  }
+`;
+
+const ModalImg = styled.img`
+  width: 40px;
+  height: 40px;
+`;
+
+const ModalButton = styled.button`
+  width: 100%;
+  background: #d87d4a;
+  padding: 15px 50px 15px 55px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+  border: none;
+  margin-top: 23px;
 `;

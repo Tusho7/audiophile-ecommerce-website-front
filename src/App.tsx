@@ -106,7 +106,7 @@ function App() {
               path="/products/:slug/detail"
               element={<Detail data={data} category={""} user={user} />}
             />
-            <Route path="/checkout" element={<Checkout data={data} />} />
+            <Route path="/checkout" element={<Checkout />} />
           </>
         ) : (
           <>
