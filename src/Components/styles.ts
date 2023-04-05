@@ -6,6 +6,18 @@ export const NavigationContainer = styled.div`
   align-items: center;
   gap: 75px;
   padding: 37px 24px;
+  @media (min-width: 768px) {
+    gap: 42px;
+    padding: 34px 39px;
+  }
+`;
+
+export const NavigationSecondContainer = styled.div`
+  @media (min-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 export const Line = styled.hr`
