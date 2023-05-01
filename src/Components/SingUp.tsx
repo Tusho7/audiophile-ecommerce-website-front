@@ -258,6 +258,10 @@ export const SignUpWrapper = styled.div`
       left: 100%;
     }
   }
+  @media (min-width: 1440px){
+    width: 30%;
+    height: 53%;
+  }
 `;
 
 const LoginDiv = styled.div`

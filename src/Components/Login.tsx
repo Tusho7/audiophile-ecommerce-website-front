@@ -180,6 +180,10 @@ export const LoginWrapper = styled.div`
       left: 100%;
     }
   }
+  @media (min-width: 1440px){
+    width: 30%;
+    height: 35%;
+  }
 `;
 
 const Buttons = styled.div`
