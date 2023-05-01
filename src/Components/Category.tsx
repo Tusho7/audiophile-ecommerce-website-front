@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function Category() {
+function Category({isInsideDetail }: any) {
+
+  const handleSeeProductClick = () => {
+    window.scrollTo(0, 0);
+  };
+
+
   return (
-    <Modal>
+    <Modal style={{ paddingTop: isInsideDetail ? '240px' : 0 }}>
       <CategoryContainer>
         <CategoryDiv>
           <CategoryPictures>
@@ -16,7 +22,7 @@ function Category() {
             <p>HEADPHONES</p>
             <ShopContainer>
               <Link to="/products/headphones">
-                <p>SHOP</p>
+                <p onClick={handleSeeProductClick}>SHOP</p>
               </Link>
 
               <img
@@ -37,7 +43,7 @@ function Category() {
             <p>SPEAKERS</p>
             <ShopContainer>
               <Link to="/products/speakers">
-                <p>SHOP</p>
+                <p onClick={handleSeeProductClick}>SHOP</p>
               </Link>
               <img
                 src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
@@ -57,7 +63,7 @@ function Category() {
             <p>EARPHONES</p>
             <ShopContainer>
               <Link to="/products/earphones">
-                <p>SHOP</p>
+                <p onClick={handleSeeProductClick}>SHOP</p>
               </Link>
               <img
                 src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-arrow-right.svg`}
@@ -72,7 +78,7 @@ function Category() {
 
 export default Category;
 
-const Modal = styled.div`
+const Modal = styled.div< {paddingTop?: string }>`
   left: 0;
   top: 105px;
   width: 100%;
@@ -87,6 +93,13 @@ const CategoryContainer = styled.div`
   margin-top: 84px;
   padding-bottom: 35px;
   background-color: white;
+  @media (min-width: 1440px){
+    width: 77%;
+    flex-direction: row;
+    gap: 30px;
+    margin-top: 200px;
+    padding-bottom: 168px;
+  }
 `;
 
 const CategoryDiv = styled.div`
@@ -94,6 +107,9 @@ const CategoryDiv = styled.div`
   border-radius: 8px;
   text-align: center;
   position: relative;
+  @media (min-width: 1440px){
+    width: 350px;
+  }
 `;
 
 const ShopContainer = styled.div`

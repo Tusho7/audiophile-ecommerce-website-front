@@ -113,8 +113,72 @@ function Detail({ data, user }: ProductProps & { user: any }) {
           />
         </GalleryImagesContainer>
       </DetailContainer>
+
+      <DetailContainerDesktop>
+        <DetailContainerSecondDesktop>
+          <div>
+            <ProductImg
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${result.image.mobile}`}
+            />
+          </div>
+
+          <ProductInfoDesktop>
+            {result.new && <NewProduct>NEW PRODUCT</NewProduct>}
+            <ProductTitle>{result.name}</ProductTitle>
+            <ProductDescription>{result.description}</ProductDescription>
+            <Price>{`$ ${result.price.toLocaleString()}`}</Price>
+            <QuantityAndButton>
+              <QuantityCont>
+                <IncreaseDecreaseButton onClick={decrease}>
+                  -
+                </IncreaseDecreaseButton>
+                <p>{quantity}</p>
+                <IncreaseDecreaseButton onClick={increase}>
+                  +
+                </IncreaseDecreaseButton>
+              </QuantityCont>
+              <AddToCartButton onClick={cartButton}>
+                Add to cart
+              </AddToCartButton>
+            </QuantityAndButton>
+          </ProductInfoDesktop>
+        </DetailContainerSecondDesktop>
+
+        <FeaturesContainerDesktop>
+          <FeaturesDiv>
+            <FeaturesTitle>FEATURES</FeaturesTitle>
+            <FeaturesText>{result.features}</FeaturesText>
+          </FeaturesDiv>
+
+          <InTheBoxDiv>
+            <InTheBox>IN THE BOX</InTheBox>
+            <div>
+              {Object.entries(result.includes).map(([key, value]) => (
+                <IncludesCont key={key}>
+                  <Quantity key={key}>{value.quantity + "x"}</Quantity>
+                  <Item>{value.item}</Item>
+                </IncludesCont>
+              ))}
+            </div>
+          </InTheBoxDiv>
+        </FeaturesContainerDesktop>
+
+        <GalleryImagesContainer>
+          <TwoGalleryImagesContainer>
+            <img
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${result.gallery.first.mobile}`}
+            />
+            <img
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${result.gallery.second.mobile}`}
+            />
+          </TwoGalleryImagesContainer>
+          <ThirdGalleryImg
+            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${result.gallery.third.mobile}`}
+          />
+        </GalleryImagesContainer>
+      </DetailContainerDesktop>
       <YouMayLike data={data} />
-      <Category />
+      <Category isInsideDetail={true}  />
       <Padding></Padding>
       <BestGear />
     </div>
@@ -132,6 +196,12 @@ const GoBack = styled.p`
   opacity: 0.5;
   padding-top: 16px;
   padding-left: 24px;
+  @media (min-width: 1440px) {
+    width: 77%;
+    margin: auto;
+    padding-top: 79px;
+    padding-bottom: 56px;
+  }
 `;
 
 const DetailContainer = styled.div`
@@ -141,15 +211,83 @@ const DetailContainer = styled.div`
   flex-wrap: wrap;
   gap: 32px;
   margin-top: 24px;
+  @media (min-width: 1440px) {
+    display: none;
+  }
 `;
+
+const DetailContainerDesktop = styled.div`
+  display: none;
+  @media (min-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+const DetailContainerSecondDesktop = styled.div`
+  display: none;
+  @media (min-width: 1440px) {
+    display: flex;
+    gap: 125px;
+    align-items: center;
+    padding: 56px 165px 160px 165px;
+  }
+`;
+
+const ProductInfoDesktop = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+`
+
+const FeaturesContainerDesktop = styled.div`
+  width: 77%;
+  margin: auto;
+  display: flex;
+  gap: 125px;
+`;
+
+const FeaturesDiv = styled.div`
+  @media (min-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 60%;
+  }
+`;
+
+const InTheBoxDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+`
+
+const InTheBox = styled.p`
+  @media (min-width: 1440px) {
+    font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 36px;
+letter-spacing: 1.14286px;
+text-transform: uppercase;
+color: #000000;
+  }
+`
 
 const Padding = styled.div`
   padding-top: 120px;
+  @media (min-width: 1440px) {
+    padding-top: 0px;
+  }
 `;
 
 const ProductImg = styled.img`
   width: 87%;
   border-radius: 8px;
+  @media (min-width: 1440px) {
+    width: 540px;
+    height: 560px;
+  }
 `;
 
 const ProductInfo = styled.div`
@@ -195,6 +333,9 @@ const QuantityAndButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (min-width: 1440px){
+    justify-content: flex-start;
+  }
 `;
 
 const QuantityCont = styled.div`
@@ -270,6 +411,12 @@ const GalleryImagesContainer = styled.div`
   gap: 20px;
   align-items: center;
   justify-content: center;
+  @media (min-width: 1440px) {
+    width: 77%;
+    margin: auto;
+    padding-top: 160px;
+    flex-direction: row;
+  }
 `;
 
 const TwoGalleryImagesContainer = styled.div`
@@ -290,6 +437,9 @@ const ThirdGalleryImg = styled.img`
   width: 87%;
   height: 368px;
   border-radius: 8px;
+  @media (min-width: 1440px) {
+    height: 592px;
+  }
 `;
 
 const FeaturesTitle = styled.h3`
@@ -299,6 +449,10 @@ const FeaturesTitle = styled.h3`
   letter-spacing: 0.857143px;
   text-transform: uppercase;
   color: #000000;
+  @media (min-width: 1440px) {
+    font-size: 32px;
+    line-height: 36px;
+  }
 `;
 
 const FeaturesText = styled.p`

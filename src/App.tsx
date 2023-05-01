@@ -88,8 +88,8 @@ function App() {
       <Routes>
         {user ? (
           <>
-            <Route path="/home" element={<Home user={user} token={token} />} />
-            <Route path="/category" element={<Category />} />
+            <Route path="/home" element={<Home user={user} token={token} data={data} />} />
+            <Route path="/category" element={<Category isInsideDetail={false} />} />
             <Route
               path="/products/:category"
               element={<Product data={data} />}

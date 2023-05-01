@@ -138,6 +138,11 @@ const CartContainer = styled.div`
   background: #ffffff;
   border-radius: 8px;
   padding: 32px 28px;
+  @media (min-width: 1440px) {
+    width: 26%;
+    margin-left: auto;
+    margin-right: 165px;
+  }
 `;
 
 const CartAndDeleteContainer = styled.div`
@@ -145,6 +150,9 @@ const CartAndDeleteContainer = styled.div`
   align-items: baseline;
   gap: 107px;
   justify-content: center;
+  @media (min-width: 1440px) {
+    justify-content: space-between;
+  }
 `;
 
 const RemoveButton = styled.button`
@@ -195,6 +203,9 @@ const TotalContainer = styled.div`
     text-align: center;
     text-transform: uppercase;
     color: #000000;
+  }
+  @media (min-width: 1440px) {
+    justify-content: space-between;
   }
 `;
 

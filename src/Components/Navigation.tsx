@@ -1,9 +1,12 @@
-import { CallTracker } from "assert";
 import { useEffect, useState } from "react";
 import Cart from "./Cart";
 import Category from "./Category";
-import { NavigationContainer, NavigationSecondContainer } from "./styles";
+import { NavigationContainer, NavigationSecondContainer, HamburgerDiv, DesktopListContainer } from "./styles";
+import { useNavigate } from "react-router-dom";
+
+
 function Navigation({ user, token }: any) {
+  const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
   const [cartModal, setCartModal] = useState(false);
 
@@ -31,14 +34,30 @@ function Navigation({ user, token }: any) {
     };
   }, []);
 
+  const GoHome = () => {
+    navigate("/home");
+  }
+
+  const GoHeadphones = () => {
+    navigate("/products/headphones")
+  }
+
+  const GoSpeakers = () => {
+    navigate("/products/speakers")
+  }
+
+  const GoEarphones = () => {
+    navigate("/products/earphones")
+  }
+
   return (
     <div>
       <NavigationContainer>
-        <div onClick={toggleVisible}>
+        <HamburgerDiv onClick={toggleVisible}>
           <img
             src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-hamburger.svg`}
           />
-        </div>
+        </HamburgerDiv>
 
         <NavigationSecondContainer>
           <div>
@@ -46,6 +65,13 @@ function Navigation({ user, token }: any) {
               src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/logo.svg`}
             />
           </div>
+
+          <DesktopListContainer>
+            <p onClick={GoHome}>Home</p>
+            <p onClick={GoHeadphones}>HEADPHONES</p>
+            <p onClick={GoSpeakers}>SPEAKERS</p>
+            <p onClick={GoEarphones}>EARPHONES</p>
+          </DesktopListContainer>
 
           <div onClick={handleClick}>
             <img

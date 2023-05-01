@@ -22,7 +22,7 @@ function Login({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <label>Email</label>
+            <label>Email</label>     
           </div>
           <div className="login-input">
             <input

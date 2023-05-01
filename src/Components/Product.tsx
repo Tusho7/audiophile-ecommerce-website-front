@@ -16,6 +16,12 @@ function Product({ data }: ProductProps) {
       </div>
     );
   }
+
+  const handleSeeProductClick = () => {
+    window.scrollTo(0, 0);
+  };
+
+  
   return (
     <div>
       <Navigation />
@@ -25,23 +31,26 @@ function Product({ data }: ProductProps) {
       </TitleContainer>
 
       {filteredData.length > 0 &&
-        filteredData.map((product: ProductType) => (
-          <ProductsContainer key={product.id}>
+        filteredData.map((product: ProductType, index: number) => (
+          <ProductsContainer key={product.id} reverse={index % 2 === 1}>
+            <div>
+
             <ProductImg
               src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${product.image.mobile}`}
             />
+            </div>
             <ProductDescriptionContainer>
               {product.new && <NewProduct>NEW PRODUCT</NewProduct>}
               <ProductTitle>{product.name}</ProductTitle>
               <ProductDescription>{product.description}</ProductDescription>
               <Link to={`/products/${product.slug}/detail`}>
-                <ProductButton>SEE PRODUCT</ProductButton>
+                <ProductButton onClick={handleSeeProductClick}>SEE PRODUCT</ProductButton>
               </Link>
             </ProductDescriptionContainer>
           </ProductsContainer>
         ))}
 
-      <Category />
+      <Category isInsideDetail={false}/>
       <BestGear />
     </div>
   );
@@ -65,19 +74,30 @@ const H2 = styled.h2`
   padding-bottom: 32px;
 `;
 
-const ProductsContainer = styled.div`
+const ProductsContainer = styled.div<{ reverse: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 32px;
   margin-top: 64px;
+  @media (min-width: 1440px){
+    flex-direction: ${props => props.reverse ? 'row-reverse' : 'row'};
+    gap: 125px;
+    padding-left: 165px;
+    padding-right: 165px;
+    margin-top: 160px;
+  }
 `;
 
 const ProductImg = styled.img`
   width: 327px;
   height: 357px;
   border-radius: 8px;
+  @media (min-width: 1440px){
+    width: 540px;
+    height: 560px;
+  }
 `;
 
 const ProductDescriptionContainer = styled.div`
@@ -86,6 +106,9 @@ const ProductDescriptionContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 24px;
+  @media (min-width: 1440px){
+    align-items: flex-start;
+  }
 `;
 
 const NewProduct = styled.p`
@@ -96,6 +119,9 @@ const NewProduct = styled.p`
   letter-spacing: 10px;
   text-transform: uppercase;
   color: #d87d4a;
+  @media (min-width: 1440px){
+    text-align: left;
+  }
 `;
 
 const ProductTitle = styled.p`
@@ -106,6 +132,11 @@ const ProductTitle = styled.p`
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #000000;
+  @media (min-width: 1440px){
+    text-align: left;
+    font-size: 40px;
+line-height: 44px;
+  }
 `;
 
 const ProductDescription = styled.p`
@@ -117,4 +148,7 @@ const ProductDescription = styled.p`
   color: #000000;
   mix-blend-mode: normal;
   opacity: 0.5;
+  @media (min-width: 1440px){
+    text-align: left;
+  }
 `;

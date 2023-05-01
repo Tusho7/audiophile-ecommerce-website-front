@@ -231,6 +231,27 @@ function Checkout() {
       body.classList.remove("modal-open");
     }
   }, [isModalOpen]);
+  
+
+    const GoHome = () => {
+    window.scrollTo(0, 0); 
+    navigate("/home");
+  }
+
+  const GoHeadphones = () => {
+    window.scrollTo(0, 0); 
+    navigate("/products/headphones")
+  }
+
+  const GoSpeakers = () => {
+    window.scrollTo(0, 0); 
+    navigate("/products/speakers")
+  }
+
+  const GoEarphones = () => {
+    window.scrollTo(0, 0); 
+    navigate("/products/earphones")
+  }
 
   return (
     <>
@@ -241,9 +262,13 @@ function Checkout() {
         </Link>
 
         <Foorm isModalOpen={isModalOpen}>
+          <CheckoutContainerForDesktop>
+
           <CheckoutContainer>
             <MainTitle>CHECKOUT</MainTitle>
             <DetailsText>BILLING DETAILS</DetailsText>
+            <NameAndEmailContainerDesktop>
+
             <InputContainer>
               <label>Name</label>
               <input
@@ -262,6 +287,7 @@ function Checkout() {
               />
               {emailError && <ErrorText>{emailError}</ErrorText>}
             </InputContainer>
+            </NameAndEmailContainerDesktop>
             <InputContainer>
               <label>Phone Number</label>
               <input
@@ -281,6 +307,9 @@ function Checkout() {
               />
               {addressError && <ErrorText>{addressError}</ErrorText>}
             </InputContainer>
+
+            <ZipAndCityContainerDesktop>
+
             <InputContainer>
               <label>ZIP Code</label>
               <input
@@ -299,6 +328,7 @@ function Checkout() {
               />
               {cityError && <ErrorText>{cityError}</ErrorText>}
             </InputContainer>
+            </ZipAndCityContainerDesktop>
             <InputContainer>
               <label>Country</label>
               <input
@@ -331,7 +361,7 @@ function Checkout() {
               </label>
             </RadioInputsContainer>
             {paymentMethod === "e-Money" && (
-              <>
+              <EmoneyContainer>
                 <InputContainer>
                   <label>e-Money Number</label>
                   <input
@@ -352,7 +382,7 @@ function Checkout() {
                   />
                   {emoneyPINError && <ErrorText>{emoneyPINError}</ErrorText>}
                 </InputContainer>
-              </>
+              </EmoneyContainer>
             )}
           </CheckoutContainer>
           <SummaryContainerGlobal>
@@ -360,7 +390,7 @@ function Checkout() {
 
             {result.map((item: any) => (
               <SummaryMainContainer key="">
-                S
+                
                 <Img
                   src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/${item.image}`}
                 />
@@ -400,6 +430,7 @@ function Checkout() {
 
             <SummaryButton onClick={handleSubmit}>CONTINUE & PAY</SummaryButton>
           </SummaryContainerGlobal>
+          </CheckoutContainerForDesktop>
           <FooterContainer>
             <img
               src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/logo.svg`}
@@ -432,6 +463,49 @@ function Checkout() {
               />
             </FooterIcons>
           </FooterContainer>
+
+          <FooterDesktopContainer>
+        <FooterFirstContainerDesktop>
+      <FooterImgContainer>
+          <img
+            src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/logo.svg`}
+          />
+        </FooterImgContainer>
+
+        <DescriptionDesktop>
+        Audiophile is an all in one stop to fulfill your audio needs. We're a
+          small team of music lovers and sound specialists who are devoted to
+          helping you get the most out of personal audio. Come and visit our
+          demo facility - we’re open 7 days a week.
+        </DescriptionDesktop>
+
+        <SecondDescriptionDesktop>
+        Copyright 2021. All Rights Reserved
+        </SecondDescriptionDesktop>
+        </FooterFirstContainerDesktop>
+
+        <FooterTextsDesktopContainer>
+        <FooterTextsDesktop>
+          <p onClick={GoHome}>Home</p>
+          <p onClick={GoHeadphones}>HEADPHONES</p>
+          <p onClick={GoSpeakers}>SPEAKERS</p>
+          <p onClick={GoEarphones}>EARPHONES</p>
+        </FooterTextsDesktop>
+
+        <FooterIcons>
+            <img
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-facebook.svg`}
+            />
+            <img
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-twitter.svg`}
+            />
+            <img
+              src={`https://audiophile-ecommerce-tunt.onrender.com/allImages/Icons/icon-instagram.svg`}
+            />
+          </FooterIcons>
+        </FooterTextsDesktopContainer>
+
+      </FooterDesktopContainer>
         </Foorm>
 
         {isModalOpen && (
@@ -508,6 +582,17 @@ const Foorm = styled.form<MainContainerProps>`
   `}
 `;
 
+const CheckoutContainerForDesktop = styled.div`
+@media (min-width: 1440px){
+
+  width: 77%;
+  margin: auto;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+`
+
 const GoBack = styled.p`
   font-weight: 500;
   font-size: 15px;
@@ -517,6 +602,13 @@ const GoBack = styled.p`
   opacity: 0.5;
   padding-top: 16px;
   padding-left: 24px;
+  @media (min-width: 1440px) {
+    width: 77%;
+    margin: auto;
+    padding-left: 0px;
+    padding-top: 79px;
+    padding-bottom: 38px;
+  }
 `;
 
 const CheckoutContainer = styled.div`
@@ -536,6 +628,10 @@ const CheckoutContainer = styled.div`
     padding-bottom: 19px;
     padding-left: 24px;
   }
+  @media (min-width: 1440px) {
+    width: 100%;
+    margin-top: 0px;
+  }
 `;
 
 const SummaryContainerGlobal = styled.div`
@@ -545,6 +641,10 @@ const SummaryContainerGlobal = styled.div`
   border-radius: 8px;
   margin-top: 32px;
   padding: 24px 24px 32px 24px;
+  @media (min-width: 1440px) {
+    width: 47%;
+    margin-top: 0px;
+  }
 `;
 
 const SummaryTitle = styled.p`
@@ -668,6 +768,22 @@ const DetailsText = styled.p`
   padding-bottom: 16px;
 `;
 
+const NameAndEmailContainerDesktop = styled.div`
+  display: flex;
+  gap: 16px;
+  input {
+    width: 100%;
+  }
+`
+
+const ZipAndCityContainerDesktop = styled.div`
+  display: flex;
+  gap: 16px;
+  input {
+    width: 100%;
+  }
+`
+
 const PaymentMethodText = styled.p`
   font-weight: 700;
   font-size: 12px;
@@ -692,6 +808,10 @@ const InputContainer = styled.div`
 
     color: #000000;
   }
+  @media (min-width: 1440px) {
+    margin: 0;
+    width: 45%;
+  }
 `;
 
 const ErrorText = styled.p`
@@ -703,16 +823,19 @@ const ErrorText = styled.p`
   color: red;
 `;
 
-export const FooterContainer = styled.div`
+const FooterContainer = styled.div`
   background-color: #101010;
   color: #ffffff;
   text-align: center;
   margin-top: 120px;
   padding-top: 52px;
   padding-bottom: 38px;
+  @media (min-width: 1440px) {
+    display: none;
+  }
 `;
 
-export const FooterTexts = styled.div`
+const FooterTexts = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -725,7 +848,7 @@ export const FooterTexts = styled.div`
   color: #ffffff;
 `;
 
-export const Description = styled.div`
+const Description = styled.div`
   margin: auto;
   padding-bottom: 48px;
   font-weight: 500;
@@ -737,7 +860,7 @@ export const Description = styled.div`
   opacity: 0.5;
 `;
 
-export const FooterIcons = styled.div`
+const FooterIcons = styled.div`
   display: flex;
   gap: 16px;
   justify-content: center;
@@ -757,6 +880,10 @@ const RadioInputsContainer = styled.div`
     padding-bottom: 32px;
     border: 1px solid #cfcfcf;
     border-radius: 8px;
+  }
+  @media (min-width: 1440px){
+    width: 95%;
+    margin-left: 0px;
   }
   label:first-child {
     margin-bottom: 16px;
@@ -783,6 +910,13 @@ const RadioInputsContainer = styled.div`
   }
 `;
 
+const EmoneyContainer = styled.div`
+  @media (min-width: 1440px) {
+    display: flex;
+    gap: 16px;
+  }
+`
+
 const ModalContainer = styled.div`
   width: 87%;
   margin: auto;
@@ -795,6 +929,9 @@ const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  @media (min-width: 1440px) {
+    width: 38%;
+  }
 `;
 
 const ModalTitle = styled.h1`
@@ -806,6 +943,11 @@ const ModalTitle = styled.h1`
   text-transform: uppercase;
   color: #000000;
   padding-top: 24px;
+  @media (min-width: 1440px) {
+    width: 284px;
+    font-size: 32px;
+line-height: 36px;
+  }
 `;
 
 const ModalText = styled.p`
@@ -914,3 +1056,64 @@ const ModalButton = styled.button`
   border: none;
   margin-top: 23px;
 `;
+
+const FooterDesktopContainer = styled.div`
+display: none;
+  @media (min-width: 1440px) {
+    margin-top: 200px;
+    display: flex;
+    gap: 141px;
+    background: #101010;
+    padding: 65px 165px 48px 165px;
+  }
+`;
+
+const FooterFirstContainerDesktop = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+`;
+
+const FooterTextsDesktopContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 105px;
+`;
+
+const DescriptionDesktop = styled.p`
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 25px;
+  color: #ffffff;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+`;
+
+const SecondDescriptionDesktop = styled.p`
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 25px;
+  color: #ffffff;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+`;
+
+const FooterTextsDesktop = styled.div`
+  display: flex;
+  gap: 34px;
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 25px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+`;
+
+const FooterImgContainer = styled.div``;
