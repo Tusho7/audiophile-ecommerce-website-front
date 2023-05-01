@@ -13,12 +13,13 @@
 
 ### Prerequisites
 
-- <img src="public/images/logos/typescript.png" with="25" style="top: 8px"/> \_Typescript @4 and up
+- <img src="public/images/typescript.png" with="25" style="top: 8px"/> \_Typescript @4 and up
 
 ### Tech Stack
 
-- <img src="public/images/logos/react.png" width="25" style="top: 8px" /> _React @ 18.0.26 - front-end framework_
-- <img src="public/images/logos/styledcomponents.png" width="25" style="top: 8px" /> Styled-Components @5.1.26 - CSS framework\_
+- <img src="public/images/react.png" width="25" style="top: 8px" /> _React @ 18.0.26 - front-end framework_
+- <img src="public/images/styledcomponents.png" width="25" style="top: 8px" /> Styled-Components @5.1.26 - CSS framework\_
+- <img src="public/images/axios.png" width="25" style="top: 8px" /> Axios @1.3.4
 
 #
 
